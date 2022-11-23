@@ -10,11 +10,12 @@ const menuItems = <>
     <li><NavLink to={"/myProducts"}>My Products</NavLink></li>
     <li><NavLink to={"/myWishList"}>My Wishlist</NavLink></li>
     <li><NavLink to={"/dashboard"}>Dashboard</NavLink></li>
+    <li><NavLink to={"/login"}>Login</NavLink></li>
 </>;
 
 const Navbar = () => {
     return (
-        <div className="navbar bg-blue-100">
+        <div className="navbar">
             <div className="navbar-start">
                 <div className="dropdown">
                     <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -24,15 +25,12 @@ const Navbar = () => {
                         {menuItems}
                     </ul>
                 </div>
-                <Link className="upper-case text-2xl font-bold">Dress Recycle</Link>
+                <Link to={"/"} className="upper-case text-2xl font-bold">Dress Recycle</Link>
             </div>
             <div className="navbar-center hidden lg:flex">
-                <ul className="menu menu-horizontal p-0">
+                <ul className="menu menu-horizontal p-0 rounded-box bg-blue-100">
                     {menuItems}
                 </ul>
-            </div>
-            <div className="navbar-end">
-                <Link to={"/login"} className='btn'>Login</Link>
             </div>
         </div>
     );
