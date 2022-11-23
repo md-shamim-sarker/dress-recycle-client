@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import Loading from '../Loading/Loading';
+import Loading from '../../components/Loading';
 
 const Blog = () => {
     const [questions, setQuestions] = useState([]);

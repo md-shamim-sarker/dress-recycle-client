@@ -1,10 +1,30 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {RiFacebookFill, RiGoogleFill} from 'react-icons/ri';
 import {Link} from 'react-router-dom';
 import login from '../../assets/login.jpg';
 import {useForm} from "react-hook-form";
+import {AuthContext} from '../../contexts/UserContext';
 
 const Login = () => {
+    const {signInWithGoogle, signInWithFacebook} = useContext(AuthContext);
+
+    const signInWithGoogleHandler = () => {
+        signInWithGoogle()
+            .then(result => {
+                console.log(result.user);
+            }).catch(err => {
+                console.log(err);
+            });
+    };
+
+    const signInWithFacebookHandler = () => {
+        signInWithFacebook()
+            .then(result => {
+                console.log(result.user);
+            }).catch(err => {
+                console.log(err);
+            });
+    };
 
     const {register, handleSubmit} = useForm();
     const onSubmit = data => {
@@ -47,10 +67,10 @@ const Login = () => {
                         <div className="divider">OR</div>
                         <h2 className='text-xl font-bold text-center'>Login with social account</h2>
                         <div className='flex gap-1 justify-center my-2'>
-                            <button>
+                            <button onClick={signInWithGoogleHandler}>
                                 <RiGoogleFill className='text-2xl'></RiGoogleFill>
                             </button>
-                            <button>
+                            <button onClick={signInWithFacebookHandler}>
                                 <RiFacebookFill className='text-2xl'></RiFacebookFill>
                             </button>
                         </div>
