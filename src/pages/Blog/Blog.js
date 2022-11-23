@@ -24,7 +24,7 @@ const Blog = () => {
                 }
                 {
                     questions.map(question =>
-                        <div key={question.id} tabindex={0} className="collapse collapse-plus border border-base-300 bg-base-100 rounded-box">
+                        <div key={question.id} tabIndex={0} className="collapse collapse-plus border border-base-300 bg-base-100 rounded-box">
                             <div className="collapse-title text-xl font-medium">
                                 Question-{question.id}: {question.question}
                             </div>

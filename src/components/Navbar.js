@@ -1,12 +1,14 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import {Link, NavLink} from 'react-router-dom';
 import {RiMenu2Fill} from 'react-icons/ri';
+import {AiOutlineClose} from 'react-icons/ai';
 import {AuthContext} from '../contexts/UserContext';
 
 
 
 const Navbar = () => {
     const {user, logOut} = useContext(AuthContext);
+    const [open, setOpen] = useState(false);
 
     const logOutHandler = () => {
         logOut()
@@ -24,18 +26,23 @@ const Navbar = () => {
         <li><NavLink to={"/myWishList"}>My Wishlist</NavLink></li>
         <li><NavLink to={"/dashboard"}>Dashboard</NavLink></li>
     </>;
+
     return (
         <div className="navbar">
             <div className="navbar-start">
                 <div className="dropdown">
-                    <label tabIndex={0} className="btn btn-ghost lg:hidden">
-                        <RiMenu2Fill className='text-2xl'></RiMenu2Fill>
+                    <label onClick={() => setOpen(!open)} tabIndex={0} className="lg:hidden">
+                        {
+                            open
+                                ? <AiOutlineClose className='text-2xl'></AiOutlineClose>
+                                : <RiMenu2Fill className='text-2xl'></RiMenu2Fill>
+                        }
                     </label>
-                    <ul tabIndex={1} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
+                    <ul onClick={() => setOpen(!open)} tabIndex={1} className={`${open || 'hidden'} menu menu-compact absolute top-10 z-50 mt-3 p-2 shadow-lg border bg-base-100 rounded-box w-52`}>
                         {menuItems}
                     </ul>
                 </div>
-                <Link to={"/"} className="upper-case text-xl lg:text-2xl font-bold">Dress Recycle</Link>
+                <Link to={"/"} className="upper-case text-xl lg:text-2xl font-bold ml-2">Dress Recycle</Link>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal p-0">
@@ -54,7 +61,6 @@ const Navbar = () => {
                         ? <button onClick={logOutHandler} className="btn btn-primary btn-sm">Logout</button>
                         : <NavLink to={"/login"} className="btn btn-primary btn-sm">Login</NavLink>
                 }
-
             </div>
         </div>
     );
