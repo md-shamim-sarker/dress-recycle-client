@@ -1,14 +1,27 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import login from '../../assets/login.jpg';
 import {useForm} from 'react-hook-form';
 import {Link} from 'react-router-dom';
+import {AuthContext} from '../../contexts/UserContext';
 
 const Register = () => {
+    const {createUser, updateUser, signInWithEmailPassword, logOut} = useContext(AuthContext);
 
     const {register, handleSubmit, reset} = useForm();
     const onSubmit = data => {
-        console.log(data);
-        reset();
+        createUser(data.email, data.password)
+            .then(result => {
+                logOut().then().catch();
+                updateUser(data.fullName, data.image)
+                    .then(() => {
+                        signInWithEmailPassword(data.email, data.password)
+                            .then(result => {
+                                console.log(result.user);
+                            }).catch(err => console.log(err));
+                        reset();
+                    }).catch(err => console.log(err));
+                console.log(result.user);
+            }).catch(err => console.log(err));
     };
 
     return (

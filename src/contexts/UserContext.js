@@ -5,7 +5,10 @@ import {
     GoogleAuthProvider,
     FacebookAuthProvider,
     signOut,
-    onAuthStateChanged
+    onAuthStateChanged,
+    createUserWithEmailAndPassword,
+    updateProfile,
+    signInWithEmailAndPassword
 } from "firebase/auth";
 import app from '../firebase/Firebase.config';
 
@@ -32,6 +35,26 @@ const UserContext = ({children}) => {
         return signInWithPopup(auth, facebookProvider);
     };
 
+    // Create user
+    const createUser = (email, password) => {
+        setLoading(true);
+        return createUserWithEmailAndPassword(auth, email, password);
+    };
+
+    // Update user
+    const updateUser = (fullName, image) => {
+        return updateProfile(auth.currentUser, {
+            displayName: fullName,
+            photoURL: image
+        });
+    };
+
+    // Sign in with email and password
+    const signInWithEmailPassword = (email, password) => {
+        setLoading(true);
+        return signInWithEmailAndPassword(auth, email, password);
+    };
+
     // Sign out
     const logOut = () => {
         setLoading(true);
@@ -54,7 +77,10 @@ const UserContext = ({children}) => {
         signInWithGoogle,
         signInWithFacebook,
         logOut,
-        loading
+        loading,
+        createUser,
+        updateUser,
+        signInWithEmailPassword
     };
     return (
         <AuthContext.Provider value={authInfo}>

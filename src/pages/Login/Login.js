@@ -6,7 +6,7 @@ import {useForm} from "react-hook-form";
 import {AuthContext} from '../../contexts/UserContext';
 
 const Login = () => {
-    const {signInWithGoogle, signInWithFacebook} = useContext(AuthContext);
+    const {signInWithGoogle, signInWithFacebook, signInWithEmailPassword} = useContext(AuthContext);
 
     const signInWithGoogleHandler = () => {
         signInWithGoogle()
@@ -28,7 +28,10 @@ const Login = () => {
 
     const {register, handleSubmit} = useForm();
     const onSubmit = data => {
-        console.log(data);
+        signInWithEmailPassword(data.email, data.password)
+            .then(result => {
+                console.log(result.user);
+            }).catch(err => console.log(err));
     };
 
     return (

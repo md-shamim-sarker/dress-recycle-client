@@ -4,8 +4,6 @@ import {RiMenu2Fill} from 'react-icons/ri';
 import {AiOutlineClose} from 'react-icons/ai';
 import {AuthContext} from '../contexts/UserContext';
 
-
-
 const Navbar = () => {
     const {user, logOut} = useContext(AuthContext);
     const [open, setOpen] = useState(false);
