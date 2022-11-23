@@ -1,5 +1,6 @@
 {
   "name": "dress-recycle-client",
+  "author": "Md. Shamim Sarker",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

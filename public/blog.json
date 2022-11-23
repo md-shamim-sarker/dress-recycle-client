@@ -1,0 +1,22 @@
+[
+    {
+        "id": 1,
+        "question": "What are the different ways to manage a state in a React application?",
+        "answer": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit voluptatem beatae doloremque dolor. Quidem optio incidunt veniam, reiciendis, dolore modi ullam laborum repellendus cupiditate ea, molestiae quo possimus accusantium aspernatur aut. Quam non reprehenderit hic dolor quasi adipisci? Consectetur porro maiores voluptate officiis, incidunt provident unde magnam laudantium obcaecati aperiam voluptatem sit blanditiis sint adipisci at atque sequi similique doloremque magni asperiores dolores quia suscipit. Maiores excepturi delectus accusamus vitae porro magnam, laborum ullam ipsum dolore nemo veniam reprehenderit voluptatum odio voluptas deserunt dolorem fuga? Magnam distinctio architecto voluptas? Cumque quas, incidunt voluptate totam assumenda similique? Et id doloribus architecto!"
+    },
+    {
+        "id": 2,
+        "question": "How does prototypical inheritance work?",
+        "answer": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit voluptatem beatae doloremque dolor. Quidem optio incidunt veniam, reiciendis, dolore modi ullam laborum repellendus cupiditate ea, molestiae quo possimus accusantium aspernatur aut. Quam non reprehenderit hic dolor quasi adipisci? Consectetur porro maiores voluptate officiis, incidunt provident unde magnam laudantium obcaecati aperiam voluptatem sit blanditiis sint adipisci at atque sequi similique doloremque magni asperiores dolores quia suscipit. Maiores excepturi delectus accusamus vitae porro magnam, laborum ullam ipsum dolore nemo veniam reprehenderit voluptatum odio voluptas deserunt dolorem fuga? Magnam distinctio architecto voluptas? Cumque quas, incidunt voluptate totam assumenda similique? Et id doloribus architecto!"
+    },
+    {
+        "id": 3,
+        "question": "What is a unit test? Why should we write unit tests?",
+        "answer": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit voluptatem beatae doloremque dolor. Quidem optio incidunt veniam, reiciendis, dolore modi ullam laborum repellendus cupiditate ea, molestiae quo possimus accusantium aspernatur aut. Quam non reprehenderit hic dolor quasi adipisci? Consectetur porro maiores voluptate officiis, incidunt provident unde magnam laudantium obcaecati aperiam voluptatem sit blanditiis sint adipisci at atque sequi similique doloremque magni asperiores dolores quia suscipit. Maiores excepturi delectus accusamus vitae porro magnam, laborum ullam ipsum dolore nemo veniam reprehenderit voluptatum odio voluptas deserunt dolorem fuga? Magnam distinctio architecto voluptas? Cumque quas, incidunt voluptate totam assumenda similique? Et id doloribus architecto!"
+    },
+    {
+        "id": 4,
+        "question": "React vs. Angular vs. Vue?",
+        "answer": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit voluptatem beatae doloremque dolor. Quidem optio incidunt veniam, reiciendis, dolore modi ullam laborum repellendus cupiditate ea, molestiae quo possimus accusantium aspernatur aut. Quam non reprehenderit hic dolor quasi adipisci? Consectetur porro maiores voluptate officiis, incidunt provident unde magnam laudantium obcaecati aperiam voluptatem sit blanditiis sint adipisci at atque sequi similique doloremque magni asperiores dolores quia suscipit. Maiores excepturi delectus accusamus vitae porro magnam, laborum ullam ipsum dolore nemo veniam reprehenderit voluptatum odio voluptas deserunt dolorem fuga? Magnam distinctio architecto voluptas? Cumque quas, incidunt voluptate totam assumenda similique? Et id doloribus architecto!"
+    }
+]
