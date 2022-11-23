@@ -4,7 +4,7 @@ const Description = () => {
     return (
         <>
             <h2 className='text-2xl font-bold text-center my-10'>Description</h2>
-            <div className="hero">
+            <div className="hero mb-20">
                 <div className="hero-content flex-col lg:flex-row-reverse">
                     <img src="https://placeimg.com/500/400/arch" className="rounded-lg shadow-2xl" alt='...' />
                     <div>

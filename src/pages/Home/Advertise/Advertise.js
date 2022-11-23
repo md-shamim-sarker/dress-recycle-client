@@ -2,7 +2,7 @@ import React from 'react';
 import demo from '../../../assets/demo.png';
 
 const card = <>
-    <div className="card card-compact bg-base-100 shadow-xl">
+    <div className="card card-compact bg-base-100 shadow-xl mb-20">
         <figure><img src={demo} alt="..." className='w-full' /></figure>
         <div className="card-body">
             <h2 className="card-title">Demo Cloth</h2>
