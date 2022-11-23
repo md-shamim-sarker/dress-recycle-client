@@ -1,9 +1,67 @@
 import React from 'react';
+import login from '../../assets/login.jpg';
+import {useForm} from 'react-hook-form';
+import {Link} from 'react-router-dom';
 
 const Register = () => {
+
+    const {register, handleSubmit, reset} = useForm();
+    const onSubmit = data => {
+        console.log(data);
+        reset();
+    };
+
     return (
-        <div>
-            Register page
+        <div className="hero">
+            <div className="w-full lg:w-4/5 mx-auto my-10 lg:my-20 hero-content flex-col lg:flex-row-reverse gap-10">
+                <div className="w-full lg:w-1/2 text-center lg:text-left">
+                    <img src={login} alt="..." className='w-full' />
+                </div>
+                <div className="w-full lg:w-1/2 card flex-shrink-0 shadow-2xl bg-base-100">
+                    <div className="card-body">
+                        <h1 className="text-4xl font-bold text-center">Register Now</h1>
+                        <form onSubmit={handleSubmit(onSubmit)}>
+                            <div className="form-control">
+                                <label className="label">
+                                    <span className="label-text">Full Name</span>
+                                </label>
+                                <input {...register("fullName")} type="text" placeholder="full name" className="input input-bordered" />
+                            </div>
+                            <div className="form-control">
+                                <label className="label">
+                                    <span className="label-text">Image URL</span>
+                                </label>
+                                <input {...register("image")} type="text" placeholder="image url" className="input input-bordered" />
+                            </div>
+                            <div className="form-control">
+                                <label className="label">
+                                    <span className="label-text">Email</span>
+                                </label>
+                                <input {...register("email")} type="email" placeholder="email" className="input input-bordered" />
+                            </div>
+                            <div className="form-control">
+                                <label className="label">
+                                    <span className="label-text">Password</span>
+                                </label>
+                                <input {...register("password")} type="password" placeholder="password" className="input input-bordered" />
+                            </div>
+                            <div className="form-control">
+                                <label className="label">
+                                    <span className="label-text">Confirm Password</span>
+                                </label>
+                                <input {...register("confirmPassword")} type="password" placeholder="confirm password" className="input input-bordered" />
+                            </div>
+                            <div className="form-control mt-3">
+                                <button type='submit' className="btn btn-primary">Register</button>
+                            </div>
+                            <div className='flex gap-1 my-1'>
+                                <span>You already have an account? Please</span>
+                                <Link to={"/login"} className="text-blue-600 underline">Login</Link>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 };
