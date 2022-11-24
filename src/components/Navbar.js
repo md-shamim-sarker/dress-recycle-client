@@ -2,6 +2,7 @@ import React, {useContext} from 'react';
 import {Link, NavLink} from 'react-router-dom';
 import {RiMenu2Fill} from 'react-icons/ri';
 import {AiOutlineClose} from 'react-icons/ai';
+import {HiDotsVertical} from 'react-icons/hi';
 import {AuthContext} from '../contexts/UserContext';
 
 const Navbar = () => {
@@ -17,6 +18,7 @@ const Navbar = () => {
     const menuItems = <>
         <li><NavLink to={"/"}>Home</NavLink></li>
         <li><NavLink to={"/blog"}>Blog</NavLink></li>
+        <li><NavLink to={"/myOrders"}>My Orders</NavLink></li>
         <li><NavLink to={"/allProducts"}>All Products</NavLink></li>
         <li><NavLink to={"/addProducts"}>Add Products</NavLink></li>
         <li><NavLink to={"/myProducts"}>My Products</NavLink></li>
@@ -25,7 +27,7 @@ const Navbar = () => {
     </>;
 
     return (
-        <div className="navbar">
+        <div className="navbar border-b">
             <div className="navbar-start">
                 <div className="dropdown">
                     <label onClick={() => setOpen(!open)} tabIndex={0} className="lg:hidden cursor-pointer">
@@ -59,6 +61,9 @@ const Navbar = () => {
                         : <NavLink to={"/login"} className="btn btn-primary btn-sm">Login</NavLink>
                 }
             </div>
+            <label htmlFor="dashboard-drawer" className="lg:hidden">
+                <HiDotsVertical className='text-2xl ml-2'></HiDotsVertical>
+            </label>
         </div>
     );
 };

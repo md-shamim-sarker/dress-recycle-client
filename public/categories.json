@@ -1,36 +1,30 @@
 [
     {
-        "id": 1,
         "categoryName": "Boy Baby",
         "image": "https://static3.depositphotos.com/1006969/219/i/600/depositphotos_2191121-stock-photo-store-cloths-hangers-on-rail.jpg",
         "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit voluptatem beatae doloremque dolor. Quidem optio incidunt veniam, reiciendis, dolore modi ullam laborum repellendus cupiditate ea, molestiae quo possimus accusantium aspernatur aut."
     },
     {
-        "id": 2,
         "categoryName": "Girl Baby",
         "image": "https://static3.depositphotos.com/1006969/219/i/600/depositphotos_2191121-stock-photo-store-cloths-hangers-on-rail.jpg",
         "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit voluptatem beatae doloremque dolor. Quidem optio incidunt veniam, reiciendis, dolore modi ullam laborum repellendus cupiditate ea, molestiae quo possimus accusantium aspernatur aut."
     },
     {
-        "id": 3,
         "categoryName": "Gentle Man",
         "image": "https://static3.depositphotos.com/1006969/219/i/600/depositphotos_2191121-stock-photo-store-cloths-hangers-on-rail.jpg",
         "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit voluptatem beatae doloremque dolor. Quidem optio incidunt veniam, reiciendis, dolore modi ullam laborum repellendus cupiditate ea, molestiae quo possimus accusantium aspernatur aut."
     },
     {
-        "id": 4,
         "categoryName": "Beatuful Lady",
         "image": "https://static3.depositphotos.com/1006969/219/i/600/depositphotos_2191121-stock-photo-store-cloths-hangers-on-rail.jpg",
         "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit voluptatem beatae doloremque dolor. Quidem optio incidunt veniam, reiciendis, dolore modi ullam laborum repellendus cupiditate ea, molestiae quo possimus accusantium aspernatur aut."
     },
     {
-        "id": 5,
         "categoryName": "Winter Variant",
         "image": "https://static3.depositphotos.com/1006969/219/i/600/depositphotos_2191121-stock-photo-store-cloths-hangers-on-rail.jpg",
         "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit voluptatem beatae doloremque dolor. Quidem optio incidunt veniam, reiciendis, dolore modi ullam laborum repellendus cupiditate ea, molestiae quo possimus accusantium aspernatur aut."
     },
     {
-        "id": 6,
         "categoryName": "Summer Variant",
         "image": "https://static3.depositphotos.com/1006969/219/i/600/depositphotos_2191121-stock-photo-store-cloths-hangers-on-rail.jpg",
         "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit voluptatem beatae doloremque dolor. Quidem optio incidunt veniam, reiciendis, dolore modi ullam laborum repellendus cupiditate ea, molestiae quo possimus accusantium aspernatur aut."

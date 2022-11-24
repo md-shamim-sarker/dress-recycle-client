@@ -27,12 +27,18 @@ const Login = () => {
                     date: Number(new Date()),
                     isAdmin: false
                 };
-                usersAddToDb(user)
-                    .then(() => {
-                        alert('User add successfully!!');
-                    }).catch(err => {
-                        console.log(err);
-                    });
+                fetch(`http://localhost:5000/users/${user.email}`)
+                    .then(res => res.json())
+                    .then(data => {
+                        if(data.length < 1) {
+                            usersAddToDb(user)
+                                .then(() => {
+                                    alert('User add successfully!!');
+                                }).catch(err => {
+                                    console.log(err);
+                                });
+                        }
+                    }).catch(err => console.log(err));
                 navigate(from, {replace: true});
             }).catch(err => {
                 console.log(err);
@@ -50,12 +56,18 @@ const Login = () => {
                     date: Number(new Date()),
                     isAdmin: false
                 };
-                usersAddToDb(user)
-                    .then(() => {
-                        alert('User add successfully!!');
-                    }).catch(err => {
-                        console.log(err);
-                    });
+                fetch(`http://localhost:5000/users/${user.email}`)
+                    .then(res => res.json())
+                    .then(data => {
+                        if(data.length < 1) {
+                            usersAddToDb(user)
+                                .then(() => {
+                                    alert('User add successfully!!');
+                                }).catch(err => {
+                                    console.log(err);
+                                });
+                        }
+                    }).catch(err => console.log(err));
                 navigate(from, {replace: true});
             }).catch(err => {
                 console.log(err);
