@@ -18,6 +18,7 @@ const auth = getAuth(app);
 const UserContext = ({children}) => {
     const [user, setUser] = useState({});
     const [loading, setLoading] = useState(true);
+    const [open, setOpen] = useState(false);
 
     // All Provider
     const googleProvider = new GoogleAuthProvider();
@@ -96,7 +97,9 @@ const UserContext = ({children}) => {
         createUser,
         updateUser,
         signInWithEmailPassword,
-        usersAddToDb
+        usersAddToDb,
+        open,
+        setOpen
     };
     return (
         <AuthContext.Provider value={authInfo}>

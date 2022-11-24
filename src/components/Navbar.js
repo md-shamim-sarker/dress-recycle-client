@@ -1,12 +1,11 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext} from 'react';
 import {Link, NavLink} from 'react-router-dom';
 import {RiMenu2Fill} from 'react-icons/ri';
 import {AiOutlineClose} from 'react-icons/ai';
 import {AuthContext} from '../contexts/UserContext';
 
 const Navbar = () => {
-    const {user, logOut} = useContext(AuthContext);
-    const [open, setOpen] = useState(false);
+    const {user, logOut, open, setOpen} = useContext(AuthContext);
 
     const logOutHandler = () => {
         logOut()
@@ -29,7 +28,7 @@ const Navbar = () => {
         <div className="navbar">
             <div className="navbar-start">
                 <div className="dropdown">
-                    <label onClick={() => setOpen(!open)} tabIndex={0} className="lg:hidden">
+                    <label onClick={() => setOpen(!open)} tabIndex={0} className="lg:hidden cursor-pointer">
                         {
                             open
                                 ? <AiOutlineClose className='text-2xl'></AiOutlineClose>
