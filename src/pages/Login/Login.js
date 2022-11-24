@@ -23,7 +23,9 @@ const Login = () => {
                 const user = {
                     fullName: data.displayName,
                     email: data.email,
+                    phone: "",
                     role: 'buyer',
+                    isVerified: false,
                     date: Number(new Date()),
                     isAdmin: false
                 };
@@ -52,7 +54,9 @@ const Login = () => {
                 const user = {
                     fullName: data.displayName,
                     email: data.email,
+                    phone: "",
                     role: 'buyer',
+                    isVerified: false,
                     date: Number(new Date()),
                     isAdmin: false
                 };

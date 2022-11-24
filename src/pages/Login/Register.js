@@ -3,7 +3,6 @@ import login from '../../assets/login.jpg';
 import {useForm} from 'react-hook-form';
 import {Link} from 'react-router-dom';
 import {AuthContext} from '../../contexts/UserContext';
-// import {async} from '@firebase/util';
 
 const Register = () => {
     const {
@@ -20,6 +19,7 @@ const Register = () => {
         const user = {
             fullName: data.fullName,
             email: data.email,
+            phone: data.phone,
             role: data.role,
             date: Number(new Date()),
             isVerified: false,
@@ -40,10 +40,10 @@ const Register = () => {
                                     .catch(err => console.log(err));
                                 console.log('Md. Shamim Sarker ', user);
                             }).catch(err => console.log(err));
-                        reset();
                     }).catch(err => console.log(err));
                 console.log(result.user);
             }).catch(err => console.log(err));
+        reset();
     };
 
     return (
@@ -67,6 +67,12 @@ const Register = () => {
                                     <span className="label-text">Image URL</span>
                                 </label>
                                 <input {...register("image")} type="text" placeholder="image url" className="input input-bordered" />
+                            </div>
+                            <div className="form-control">
+                                <label className="label">
+                                    <span className="label-text">Phone Number</span>
+                                </label>
+                                <input {...register("phone")} type="text" placeholder="phone number" className="input input-bordered" />
                             </div>
                             <div className="form-control">
                                 <label className="label">
