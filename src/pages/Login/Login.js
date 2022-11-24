@@ -1,17 +1,21 @@
 import React, {useContext} from 'react';
 import {RiFacebookFill, RiGoogleFill} from 'react-icons/ri';
-import {Link} from 'react-router-dom';
+import {Link, useLocation, useNavigate} from 'react-router-dom';
 import login from '../../assets/login.jpg';
 import {useForm} from "react-hook-form";
 import {AuthContext} from '../../contexts/UserContext';
 
 const Login = () => {
     const {signInWithGoogle, signInWithFacebook, signInWithEmailPassword} = useContext(AuthContext);
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || "/";
 
     const signInWithGoogleHandler = () => {
         signInWithGoogle()
             .then(result => {
                 console.log(result.user);
+                navigate(from, {replace: true});
             }).catch(err => {
                 console.log(err);
             });
@@ -21,6 +25,7 @@ const Login = () => {
         signInWithFacebook()
             .then(result => {
                 console.log(result.user);
+                navigate(from, {replace: true});
             }).catch(err => {
                 console.log(err);
             });
@@ -31,6 +36,7 @@ const Login = () => {
         signInWithEmailPassword(data.email, data.password)
             .then(result => {
                 console.log(result.user);
+                navigate(from, {replace: true});
             }).catch(err => console.log(err));
     };
 
