@@ -27,7 +27,7 @@ const Navbar = () => {
     </>;
 
     return (
-        <div className="navbar border-b">
+        <div className="navbar border-b bg-base-200">
             <div className="navbar-start">
                 <div className="dropdown">
                     <label onClick={() => setOpen(!open)} tabIndex={0} className="lg:hidden cursor-pointer">
@@ -41,7 +41,7 @@ const Navbar = () => {
                         {menuItems}
                     </ul>
                 </div>
-                <Link to={"/"} className="upper-case text-xl lg:text-2xl font-bold ml-2">Dress Recycle</Link>
+                <Link to={"/"} className="uppercase text-primary text-xl lg:text-2xl font-bold ml-2">Dress Recycle</Link>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal p-0">
