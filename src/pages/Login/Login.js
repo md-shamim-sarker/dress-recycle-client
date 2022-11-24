@@ -6,7 +6,12 @@ import {useForm} from "react-hook-form";
 import {AuthContext} from '../../contexts/UserContext';
 
 const Login = () => {
-    const {signInWithGoogle, signInWithFacebook, signInWithEmailPassword} = useContext(AuthContext);
+    const {
+        signInWithGoogle,
+        signInWithFacebook,
+        signInWithEmailPassword,
+        usersAddToDb
+    } = useContext(AuthContext);
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || "/";
@@ -14,7 +19,20 @@ const Login = () => {
     const signInWithGoogleHandler = () => {
         signInWithGoogle()
             .then(result => {
-                console.log(result.user);
+                const data = result.user;
+                const user = {
+                    fullName: data.displayName,
+                    email: data.email,
+                    role: 'buyer',
+                    date: Number(new Date()),
+                    isAdmin: false
+                };
+                usersAddToDb(user)
+                    .then(() => {
+                        alert('User add successfully!!');
+                    }).catch(err => {
+                        console.log(err);
+                    });
                 navigate(from, {replace: true});
             }).catch(err => {
                 console.log(err);
@@ -24,7 +42,20 @@ const Login = () => {
     const signInWithFacebookHandler = () => {
         signInWithFacebook()
             .then(result => {
-                console.log(result.user);
+                const data = result.user;
+                const user = {
+                    fullName: data.displayName,
+                    email: data.email,
+                    role: 'buyer',
+                    date: Number(new Date()),
+                    isAdmin: false
+                };
+                usersAddToDb(user)
+                    .then(() => {
+                        alert('User add successfully!!');
+                    }).catch(err => {
+                        console.log(err);
+                    });
                 navigate(from, {replace: true});
             }).catch(err => {
                 console.log(err);

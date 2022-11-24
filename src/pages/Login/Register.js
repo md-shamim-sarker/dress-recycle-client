@@ -20,7 +20,6 @@ const Register = () => {
         const user = {
             fullName: data.fullName,
             email: data.email,
-            phone: data.phone,
             role: data.role,
             date: Number(new Date()),
             isAdmin: false
@@ -46,21 +45,6 @@ const Register = () => {
             }).catch(err => console.log(err));
     };
 
-    /* const usersAddToDb = async (user) => {
-        try {
-            await fetch('http://localhost:5000/users', {
-                method: 'POST',
-                headers: {
-                    'content-type': 'application/json'
-                },
-                body: JSON.stringify(user)
-            });
-            console.log('User Added Successfully!!!');
-        } catch(error) {
-            console.error(error.message);
-        }
-    }; */
-
     return (
         <div className="hero">
             <div className="w-full lg:w-4/5 mx-auto my-10 lg:my-20 hero-content flex-col lg:flex-row-reverse gap-10">
@@ -82,12 +66,6 @@ const Register = () => {
                                     <span className="label-text">Image URL</span>
                                 </label>
                                 <input {...register("image")} type="text" placeholder="image url" className="input input-bordered" />
-                            </div>
-                            <div className="form-control">
-                                <label className="label">
-                                    <span className="label-text">Phone Number</span>
-                                </label>
-                                <input {...register("phone")} type="text" placeholder="phone number" className="input input-bordered" />
                             </div>
                             <div className="form-control">
                                 <label className="label">
