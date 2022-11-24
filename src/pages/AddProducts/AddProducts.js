@@ -19,6 +19,7 @@ const AddProducts = () => {
         const product = {
             categoryId: data.category.split(',')[0],
             category: data.category.split(',')[1],
+            categoryImage: data.category.split(',')[2],
             condition: data.condition,
             description: data.description,
             email: data.email,
@@ -30,31 +31,26 @@ const AddProducts = () => {
             productName: data.productName,
             resalePrice: data.resalePrice,
             yearsOfUse: data.yearsOfUse,
-            soldOut: false
+            soldOut: false,
+            reportToAdmin: false,
+            advertise: false,
+            date: Date().slice(4, 24)
         };
 
-        productsAddToDb(product)
-            .then(() => {
-                alert('A product added successfully!!!');
+        fetch('http://localhost:5000/products', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(product)
+        }).then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if(data.acknowledged) {
+                    alert("Product added successfully!");
+                }
             })
-            .catch(err => {
-                console.log(err);
-            });
-    };
-
-    const productsAddToDb = async (product) => {
-        try {
-            await fetch('http://localhost:5000/products', {
-                method: 'POST',
-                headers: {
-                    'content-type': 'application/json'
-                },
-                body: JSON.stringify(product)
-            });
-            console.log('Product Added Successfully!!!');
-        } catch(error) {
-            console.error(error.message);
-        }
+            .catch(console.dir);
     };
 
     return (
@@ -107,11 +103,12 @@ const AddProducts = () => {
                                     <label className="label">
                                         <span className="label-text">Category</span>
                                     </label>
-                                    <select {...register("category")} defaultValue='Boy Baby' className="select select-bordered">
+                                    <select {...register("category")} className="select select-bordered" defaultValue={'---Select A Category---'}>
+                                        <option disabled>---Select A Category---</option>
                                         {
                                             categories.map(category => <option
                                                 key={category._id}
-                                                value={[category._id, category.categoryName]}
+                                                value={[category._id, category.categoryName, category.image]}
                                             >{category.categoryName}</option>)
                                         }
                                     </select>
