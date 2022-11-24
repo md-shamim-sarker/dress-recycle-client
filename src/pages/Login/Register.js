@@ -22,6 +22,7 @@ const Register = () => {
             email: data.email,
             role: data.role,
             date: Number(new Date()),
+            isVerified: false,
             isAdmin: false
         };
 
