@@ -3,26 +3,63 @@ import login from '../../assets/login.jpg';
 import {useForm} from 'react-hook-form';
 import {Link} from 'react-router-dom';
 import {AuthContext} from '../../contexts/UserContext';
+// import {async} from '@firebase/util';
 
 const Register = () => {
-    const {createUser, updateUser, signInWithEmailPassword, logOut} = useContext(AuthContext);
+    const {
+        createUser,
+        updateUser,
+        signInWithEmailPassword,
+        logOut,
+        usersAddToDb
+    } = useContext(AuthContext);
 
     const {register, handleSubmit, reset} = useForm();
     const onSubmit = data => {
+
+        const user = {
+            fullName: data.fullName,
+            email: data.email,
+            phone: data.phone,
+            role: data.role,
+            date: Number(new Date()),
+            isAdmin: false
+        };
+
         createUser(data.email, data.password)
-            .then(result => {
+            .then((result) => {
                 logOut().then().catch();
                 updateUser(data.fullName, data.image)
                     .then(() => {
                         signInWithEmailPassword(data.email, data.password)
-                            .then(result => {
-                                console.log(result.user);
+                            .then(() => {
+                                usersAddToDb(user)
+                                    .then(() => {
+                                        alert('Data Added Successfully!!');
+                                    })
+                                    .catch(err => console.log(err));
+                                console.log('Md. Shamim Sarker ', user);
                             }).catch(err => console.log(err));
                         reset();
                     }).catch(err => console.log(err));
                 console.log(result.user);
             }).catch(err => console.log(err));
     };
+
+    /* const usersAddToDb = async (user) => {
+        try {
+            await fetch('http://localhost:5000/users', {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify(user)
+            });
+            console.log('User Added Successfully!!!');
+        } catch(error) {
+            console.error(error.message);
+        }
+    }; */
 
     return (
         <div className="hero">
@@ -48,6 +85,12 @@ const Register = () => {
                             </div>
                             <div className="form-control">
                                 <label className="label">
+                                    <span className="label-text">Phone Number</span>
+                                </label>
+                                <input {...register("phone")} type="text" placeholder="phone number" className="input input-bordered" />
+                            </div>
+                            <div className="form-control">
+                                <label className="label">
                                     <span className="label-text">Email</span>
                                 </label>
                                 <input {...register("email")} type="email" placeholder="email" className="input input-bordered" />
@@ -63,6 +106,15 @@ const Register = () => {
                                     <span className="label-text">Confirm Password</span>
                                 </label>
                                 <input {...register("confirmPassword")} type="password" placeholder="confirm password" className="input input-bordered" />
+                            </div>
+                            <div className="form-control w-full">
+                                <label className="label">
+                                    <span className="label-text">Select User Role</span>
+                                </label>
+                                <select {...register("role")} defaultValue='buyer' className="select select-bordered">
+                                    <option value='buyer'>Buyer</option>
+                                    <option value='seller'>Seller</option>
+                                </select>
                             </div>
                             <div className="form-control mt-3">
                                 <button type='submit' className="btn btn-primary">Register</button>

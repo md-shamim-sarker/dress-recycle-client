@@ -72,6 +72,21 @@ const UserContext = ({children}) => {
         };
     }, []);
 
+    const usersAddToDb = async (user) => {
+        try {
+            await fetch('http://localhost:5000/users', {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify(user)
+            });
+            console.log('User Added Successfully!!!');
+        } catch(error) {
+            console.error(error.message);
+        }
+    };
+
     const authInfo = {
         user,
         signInWithGoogle,
@@ -80,7 +95,8 @@ const UserContext = ({children}) => {
         loading,
         createUser,
         updateUser,
-        signInWithEmailPassword
+        signInWithEmailPassword,
+        usersAddToDb
     };
     return (
         <AuthContext.Provider value={authInfo}>
