@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useState} from 'react';
 import {useForm} from 'react-hook-form';
-import {AuthContext} from '../../contexts/UserContext';
+import {AuthContext} from '../../../../contexts/UserContext';
 
 const AddProducts = () => {
     const {user, userInfo} = useContext(AuthContext);

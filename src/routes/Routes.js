@@ -1,7 +1,7 @@
 import {createBrowserRouter} from "react-router-dom";
 import DashboardLayout from "../layouts/DashboardLayout";
 import Main from "../layouts/Main";
-import AddProducts from "../pages/AddProducts/AddProducts";
+import AddProducts from "../pages/Home/Banner/AddProducts/AddProducts";
 import Blog from "../pages/Blog/Blog";
 import Dashboard from "../pages/Dashboard/Dashboard";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
@@ -14,6 +14,8 @@ import MyWishLists from "../pages/MyWishList/MyWishLists";
 import Products from "../pages/Products/Products";
 import PrivateRoute from "./PrivateRoute";
 import Users from "../pages/Users/Users";
+import ReportedItems from "../pages/ReportedItems/ReportedItems";
+import RoleUsers from "../pages/RoleUsers/RoleUsers";
 
 const router = createBrowserRouter([
     {
@@ -57,6 +59,11 @@ const router = createBrowserRouter([
                 element: <PrivateRoute><Users></Users></PrivateRoute>
             },
             {
+                path: "/dashboard/role/:role",
+                loader: ({params}) => fetch(`http://localhost:5000/users/role/${params.role}`),
+                element: <PrivateRoute><RoleUsers></RoleUsers></PrivateRoute>
+            },
+            {
                 path: "/dashboard/myOrders",
                 element: <MyOrders></MyOrders>
             },
@@ -71,6 +78,10 @@ const router = createBrowserRouter([
             {
                 path: "/dashboard/myWishList",
                 element: <PrivateRoute><MyWishLists></MyWishLists></PrivateRoute>
+            },
+            {
+                path: "/dashboard/reportedItems",
+                element: <PrivateRoute><ReportedItems></ReportedItems></PrivateRoute>
             },
         ]
     }
