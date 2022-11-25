@@ -2,7 +2,6 @@ import {createBrowserRouter} from "react-router-dom";
 import DashboardLayout from "../layouts/DashboardLayout";
 import Main from "../layouts/Main";
 import AddProducts from "../pages/AddProducts/AddProducts";
-import AllProducts from "../pages/AllProducts/AllProducts";
 import Blog from "../pages/Blog/Blog";
 import Dashboard from "../pages/Dashboard/Dashboard";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
@@ -11,9 +10,10 @@ import Login from "../pages/Login/Login";
 import Register from "../pages/Login/Register";
 import MyOrders from "../pages/MyOrders/MyOrders";
 import MyProducts from "../pages/MyProducts/MyProducts";
-import MyWishList from "../pages/MyWishList/MyWishList";
+import MyWishLists from "../pages/MyWishList/MyWishLists";
 import Products from "../pages/Products/Products";
 import PrivateRoute from "./PrivateRoute";
+import Users from "../pages/Users/Users";
 
 const router = createBrowserRouter([
     {
@@ -27,26 +27,6 @@ const router = createBrowserRouter([
             {
                 path: "/blog",
                 element: <Blog></Blog>
-            },
-            {
-                path: "/myOrders",
-                element: <MyOrders></MyOrders>
-            },
-            {
-                path: "/allProducts",
-                element: <PrivateRoute><AllProducts></AllProducts></PrivateRoute>
-            },
-            {
-                path: "/addProducts",
-                element: <PrivateRoute><AddProducts></AddProducts></PrivateRoute>
-            },
-            {
-                path: "/myProducts",
-                element: <PrivateRoute><MyProducts></MyProducts></PrivateRoute>
-            },
-            {
-                path: "/myWishList",
-                element: <PrivateRoute><MyWishList></MyWishList></PrivateRoute>
             },
             {
                 path: "/login",
@@ -71,7 +51,27 @@ const router = createBrowserRouter([
             {
                 path: "/dashboard",
                 element: <Dashboard></Dashboard>
-            }
+            },
+            {
+                path: "/dashboard/users",
+                element: <PrivateRoute><Users></Users></PrivateRoute>
+            },
+            {
+                path: "/dashboard/myOrders",
+                element: <MyOrders></MyOrders>
+            },
+            {
+                path: "/dashboard/addProducts",
+                element: <PrivateRoute><AddProducts></AddProducts></PrivateRoute>
+            },
+            {
+                path: "/dashboard/myProducts",
+                element: <PrivateRoute><MyProducts></MyProducts></PrivateRoute>
+            },
+            {
+                path: "/dashboard/myWishList",
+                element: <PrivateRoute><MyWishLists></MyWishLists></PrivateRoute>
+            },
         ]
     }
 ]);

@@ -22,7 +22,8 @@ const Register = () => {
             phone: data.phone,
             role: data.role,
             date: Number(new Date()),
-            isVerified: false
+            isVerified: false,
+            image: data.image
         };
 
         createUser(data.email, data.password)

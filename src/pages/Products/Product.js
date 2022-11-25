@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext} from 'react';
 import {GoVerified} from 'react-icons/go';
 import {GiEternalLove} from 'react-icons/gi';
 import {MdOutlineReportProblem} from 'react-icons/md';
@@ -6,26 +6,15 @@ import {AuthContext} from '../../contexts/UserContext';
 
 const Product = ({product}) => {
     const {userInfo, user} = useContext(AuthContext);
-    const [wishLists, setWishLists] = useState(null);
-
     const productId = product._id;
-
-    useEffect(() => {
-        fetch(`http://localhost:5000/wishLists/${user?.email}`)
-            .then(res => res.json())
-            .then(data => {
-                setWishLists(data);
-            })
-            .catch(err => console.log(err));
-    }, [user?.email]);
-
-    console.log(wishLists);
 
     const wishList = {
         userName: user.displayName,
         userEmail: user.email,
         productId: product._id,
         productName: product.productName,
+        productImage: product.image,
+        productPrice: product.resalePrice,
         wishDate: Date().slice(4, 24)
     };
 
@@ -48,7 +37,7 @@ const Product = ({product}) => {
             alert(`Report to Admin Success for ${product.productName}`);
         }).catch(err => console.log(err));
     };
-    console.log(user.email, wishLists.userEmail);
+
     return (
         <div className="card card-compact bg-base-100 shadow-xl">
             <figure><img src={product.image} alt="cloth" className='w-full' /></figure>
@@ -59,12 +48,7 @@ const Product = ({product}) => {
                     </h2>
                     <div className='flex gap-4 text-xl'>
                         <button onClick={() => wishListHandler(wishList)}>
-                            {/* {
-                                user?.email === wishLists?.userEmail
-                                    ? <GiEternalLove title='Already add to wishlist' className='text-orange-500'></GiEternalLove>
-                                    : <GiEternalLove title='Add to wishlist'></GiEternalLove>
-                            } */}
-
+                            <GiEternalLove title='Already add to wishlist' className='text-rose-600'></GiEternalLove>
                         </button>
                         <button onClick={() => onUpdateHandler(productId)}>
                             {

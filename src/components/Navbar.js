@@ -18,12 +18,9 @@ const Navbar = () => {
     const menuItems = <>
         <li><NavLink to={"/"}>Home</NavLink></li>
         <li><NavLink to={"/blog"}>Blog</NavLink></li>
-        <li><NavLink to={"/myOrders"}>My Orders</NavLink></li>
-        <li><NavLink to={"/allProducts"}>All Products</NavLink></li>
-        <li><NavLink to={"/addProducts"}>Add Products</NavLink></li>
-        <li><NavLink to={"/myProducts"}>My Products</NavLink></li>
-        <li><NavLink to={"/myWishList"}>My Wishlist</NavLink></li>
-        <li><NavLink to={"/dashboard"}>Dashboard</NavLink></li>
+        {
+            user?.uid && <li><NavLink to={"/dashboard"}>Dashboard</NavLink></li>
+        }
     </>;
 
     return (
