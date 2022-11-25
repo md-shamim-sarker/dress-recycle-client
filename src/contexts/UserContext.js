@@ -20,6 +20,7 @@ const UserContext = ({children}) => {
     const [loading, setLoading] = useState(true);
     const [open, setOpen] = useState(false);
     const [userInfo, setUserInfo] = useState(null);
+    const [render, setRender] = useState(false);
 
     useEffect(() => {
         fetch(`http://localhost:5000/users/${user?.email}`)
@@ -110,7 +111,9 @@ const UserContext = ({children}) => {
         usersAddToDb,
         open,
         setOpen,
-        userInfo
+        userInfo,
+        render,
+        setRender
     };
     return (
         <AuthContext.Provider value={authInfo}>

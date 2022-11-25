@@ -1,15 +1,17 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
+import {AuthContext} from '../../../contexts/UserContext';
 import Seller from './Seller';
 
 const Sellers = () => {
     const [sellers, setSellers] = useState([]);
+    const {render} = useContext(AuthContext);
 
     useEffect(() => {
         fetch('http://localhost:5000/users/role/seller')
             .then(res => res.json())
             .then(data => setSellers(data))
             .catch(err => console.log(err));
-    }, []);
+    }, [render]);
 
     return (
         <div>
@@ -25,6 +27,7 @@ const Sellers = () => {
                             <th>Email</th>
                             <th>Role</th>
                             <th>Verification</th>
+                            <th>Make Admin</th>
                             <th>Delete</th>
                         </tr>
                     </thead>

@@ -1,9 +1,10 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
+import {AuthContext} from '../../../contexts/UserContext';
 import Buyer from './Buyer';
 
 const Buyers = () => {
     const [buyers, setBuyers] = useState([]);
-    const [render, setRender] = useState(false);
+    const {render} = useContext(AuthContext);
 
     useEffect(() => {
         fetch('http://localhost:5000/users/role/buyer')
@@ -25,6 +26,7 @@ const Buyers = () => {
                             <th>Phone</th>
                             <th>Email</th>
                             <th>Role</th>
+                            <th>Make Admin</th>
                             <th>Delete</th>
                         </tr>
                     </thead>
@@ -34,8 +36,6 @@ const Buyers = () => {
                                 key={buyer?._id}
                                 buyer={buyer}
                                 sl={sl + 1}
-                                setRender={setRender}
-                                render={render}
                             ></Buyer>)
                         }
                     </tbody>

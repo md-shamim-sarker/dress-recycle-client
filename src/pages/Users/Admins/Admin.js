@@ -1,12 +1,16 @@
-import React from 'react';
+import React, {useContext} from 'react';
+import {AuthContext} from '../../../contexts/UserContext';
 
 const Admin = ({admin, sl}) => {
+    const {render, setRender} = useContext(AuthContext);
+
     const handleDelete = user => {
         fetch(`http://localhost:5000/users/${user._id}`, {
             method: 'DELETE'
         })
             .then(res => res.json())
             .then(() => {
+                setRender(!render);
                 alert("Delete Successfully!!!");
             })
             .catch(err => console.log(err));

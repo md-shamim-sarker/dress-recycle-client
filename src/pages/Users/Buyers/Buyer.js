@@ -1,6 +1,18 @@
-import React from 'react';
+import React, {useContext} from 'react';
+import {AuthContext} from '../../../contexts/UserContext';
 
-const Buyer = ({buyer, sl, render, setRender}) => {
+const Buyer = ({buyer, sl}) => {
+    const {render, setRender} = useContext(AuthContext);
+
+    const makeAdminHandler = user => {
+        fetch(`http://localhost:5000/users/${user._id}`, {
+            method: 'PUT',
+        }).then(() => {
+            setRender(!render);
+            alert("Make Admin Successfull!!!");
+        }).catch(err => console.log(err));
+    };
+
     const handleDelete = user => {
         fetch(`http://localhost:5000/users/${user._id}`, {
             method: 'DELETE'
@@ -37,6 +49,9 @@ const Buyer = ({buyer, sl, render, setRender}) => {
             <td>{buyer?.phone}</td>
             <td>{buyer?.email}</td>
             <td>{buyer?.role}</td>
+            <td>
+                <button onClick={() => makeAdminHandler(buyer)} className="btn btn-warning btn-sm">Make Admin</button>
+            </td>
             <td>
                 <button onClick={() => handleDelete(buyer)} className="btn btn-warning btn-sm">Delete</button>
             </td>
