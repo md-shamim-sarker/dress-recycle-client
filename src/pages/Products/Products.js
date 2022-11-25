@@ -1,9 +1,11 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {useLoaderData} from 'react-router-dom';
+import {AuthContext} from '../../contexts/UserContext';
 import Product from './Product';
 import ProductBanner from './ProductBanner';
 
 const Products = () => {
+    const {user} = useContext(AuthContext);
     const products = useLoaderData();
     const categoryImage = products[0].categoryImage;
     return (
@@ -14,6 +16,7 @@ const Products = () => {
                     products.map(product => <Product
                         key={product._id}
                         product={product}
+                        user={user}
                     ></Product>)
                 }
             </div>

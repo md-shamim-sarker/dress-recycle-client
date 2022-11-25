@@ -9,8 +9,7 @@ const Register = () => {
         createUser,
         updateUser,
         signInWithEmailPassword,
-        logOut,
-        usersAddToDb
+        logOut
     } = useContext(AuthContext);
 
     const {register, handleSubmit, reset} = useForm();
@@ -44,6 +43,21 @@ const Register = () => {
                 console.log(result.user);
             }).catch(err => console.log(err));
         reset();
+    };
+
+    const usersAddToDb = async (user) => {
+        try {
+            await fetch('http://localhost:5000/users', {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify(user)
+            });
+            console.log('User Added Successfully!!!');
+        } catch(error) {
+            console.error(error.message);
+        }
     };
 
     return (

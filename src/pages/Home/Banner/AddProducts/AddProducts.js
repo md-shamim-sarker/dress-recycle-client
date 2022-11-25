@@ -3,7 +3,7 @@ import {useForm} from 'react-hook-form';
 import {AuthContext} from '../../../../contexts/UserContext';
 
 const AddProducts = () => {
-    const {user, userInfo} = useContext(AuthContext);
+    const {user} = useContext(AuthContext);
     const {register, handleSubmit} = useForm();
     const [categories, setCategories] = useState([]);
     const {displayName, email} = user;
@@ -82,7 +82,7 @@ const AddProducts = () => {
                                     <label className="label">
                                         <span className="label-text">Phone Number</span>
                                     </label>
-                                    <input {...register("phone")} type="text" value={userInfo?.phone} readOnly className="input input-bordered" />
+                                    <input {...register("phone")} type="text" className="input input-bordered" />
                                 </div>
 
                                 <div className="form-control w-full lg:w-1/2">

@@ -19,17 +19,7 @@ const UserContext = ({children}) => {
     const [user, setUser] = useState({});
     const [loading, setLoading] = useState(true);
     const [open, setOpen] = useState(false);
-    const [userInfo, setUserInfo] = useState(null);
     const [render, setRender] = useState(false);
-
-    useEffect(() => {
-        fetch(`http://localhost:5000/users/${user?.email}`)
-            .then(res => res.json())
-            .then(data => {
-                setUserInfo(data[0]);
-            })
-            .catch(err => console.log(err));
-    }, [user?.email]);
 
     // All Provider
     const googleProvider = new GoogleAuthProvider();
@@ -84,21 +74,6 @@ const UserContext = ({children}) => {
         };
     }, []);
 
-    const usersAddToDb = async (user) => {
-        try {
-            await fetch('http://localhost:5000/users', {
-                method: 'POST',
-                headers: {
-                    'content-type': 'application/json'
-                },
-                body: JSON.stringify(user)
-            });
-            console.log('User Added Successfully!!!');
-        } catch(error) {
-            console.error(error.message);
-        }
-    };
-
     const authInfo = {
         user,
         signInWithGoogle,
@@ -108,10 +83,8 @@ const UserContext = ({children}) => {
         createUser,
         updateUser,
         signInWithEmailPassword,
-        usersAddToDb,
         open,
         setOpen,
-        userInfo,
         render,
         setRender
     };
