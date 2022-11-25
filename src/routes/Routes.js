@@ -13,9 +13,10 @@ import MyProducts from "../pages/MyProducts/MyProducts";
 import MyWishLists from "../pages/MyWishList/MyWishLists";
 import Products from "../pages/Products/Products";
 import PrivateRoute from "./PrivateRoute";
-import Users from "../pages/Users/Users";
 import ReportedItems from "../pages/ReportedItems/ReportedItems";
-import RoleUsers from "../pages/RoleUsers/RoleUsers";
+import Admins from "../pages/Users/Admins/Admins";
+import Sellers from "../pages/Users/Sellers/Sellers";
+import Buyers from "../pages/Users/Buyers/Buyers";
 
 const router = createBrowserRouter([
     {
@@ -55,13 +56,16 @@ const router = createBrowserRouter([
                 element: <Dashboard></Dashboard>
             },
             {
-                path: "/dashboard/users",
-                element: <PrivateRoute><Users></Users></PrivateRoute>
+                path: "/dashboard/role/admins",
+                element: <PrivateRoute><Admins></Admins></PrivateRoute>
             },
             {
-                path: "/dashboard/role/:role",
-                loader: ({params}) => fetch(`http://localhost:5000/users/role/${params.role}`),
-                element: <PrivateRoute><RoleUsers></RoleUsers></PrivateRoute>
+                path: "/dashboard/role/sellers",
+                element: <PrivateRoute><Sellers></Sellers></PrivateRoute>
+            },
+            {
+                path: "/dashboard/role/buyers",
+                element: <PrivateRoute><Buyers></Buyers></PrivateRoute>
             },
             {
                 path: "/dashboard/myOrders",

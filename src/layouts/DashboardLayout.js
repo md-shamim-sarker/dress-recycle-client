@@ -15,10 +15,10 @@ const DashboardLayout = () => {
                 <div className="drawer-side border-r">
                     <label htmlFor="dashboard-drawer" className="drawer-overlay"></label>
                     <ul className="menu p-4 w-full bg-base-100 text-base-content">
-                        <li><NavLink to={"/dashboard/users"}>All Users</NavLink></li>
-                        <li><NavLink to={"/dashboard/role/admin"}>All Admins</NavLink></li>
-                        <li><NavLink to={"/dashboard/role/seller"}>All Sellers</NavLink></li>
-                        <li><NavLink to={"/dashboard/role/buyer"}>All Buyers</NavLink></li>
+                        {/* <li><NavLink to={"/dashboard/users"}>All Users</NavLink></li> */}
+                        <li><NavLink to={"/dashboard/role/admins"}>All Admins</NavLink></li>
+                        <li><NavLink to={"/dashboard/role/sellers"}>All Sellers</NavLink></li>
+                        <li><NavLink to={"/dashboard/role/buyers"}>All Buyers</NavLink></li>
                         <li><NavLink to={"/dashboard/myOrders"}>My Orders</NavLink></li>
                         <li><NavLink to={"/dashboard/addProducts"}>Add Products</NavLink></li>
                         <li><NavLink to={"/dashboard/myProducts"}>My Products</NavLink></li>

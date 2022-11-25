@@ -1,19 +1,20 @@
 import React, {useEffect, useState} from 'react';
-import User from './User';
+import Buyer from './Buyer';
 
-const Users = () => {
-    const [users, setUsers] = useState([]);
+const Buyers = () => {
+    const [buyers, setBuyers] = useState([]);
+    const [render, setRender] = useState(false);
 
     useEffect(() => {
-        fetch('http://localhost:5000/users')
+        fetch('http://localhost:5000/users/role/buyer')
             .then(res => res.json())
-            .then(data => setUsers(data))
+            .then(data => setBuyers(data))
             .catch(err => console.log(err));
-    }, []);
+    }, [render]);
 
     return (
         <div>
-            <h2 className='text-2xl font-bold text-center my-10'>All Users</h2>
+            <h2 className='text-2xl font-bold text-center my-10'>All Buyers</h2>
             <div className="overflow-x-auto w-full mb-20">
                 <table className="table w-full">
                     <thead>
@@ -24,17 +25,18 @@ const Users = () => {
                             <th>Phone</th>
                             <th>Email</th>
                             <th>Role</th>
-                            <th>Make Admin</th>
                             <th>Delete</th>
                         </tr>
                     </thead>
                     <tbody>
                         {
-                            users.map((user, sl) => <User
-                                key={user?._id}
-                                user={user}
+                            buyers.map((buyer, sl) => <Buyer
+                                key={buyer?._id}
+                                buyer={buyer}
                                 sl={sl + 1}
-                            ></User>)
+                                setRender={setRender}
+                                render={render}
+                            ></Buyer>)
                         }
                     </tbody>
                 </table>
@@ -43,4 +45,4 @@ const Users = () => {
     );
 };
 
-export default Users;
+export default Buyers;
