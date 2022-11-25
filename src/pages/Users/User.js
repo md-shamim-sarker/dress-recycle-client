@@ -1,6 +1,26 @@
 import React from 'react';
 
 const User = ({user, sl}) => {
+
+    const makeAdminHandler = (id) => {
+        fetch(`http://localhost:5000/users/${id}`, {
+            method: 'PUT',
+        }).then(() => {
+            alert(`Make Admin Successfully!!!`);
+        }).catch(err => console.log(err));
+    };
+
+    const handleDelete = user => {
+        fetch(`http://localhost:5000/users/${user._id}`, {
+            method: 'DELETE'
+        })
+            .then(res => res.json())
+            .then(() => {
+                alert("Delete Successfully!!!");
+            })
+            .catch(err => console.log(err));
+    };
+
     return (
         <tr>
             <th>
@@ -27,10 +47,15 @@ const User = ({user, sl}) => {
             <td>{user?.email}</td>
             <td>{user?.role}</td>
             <td>
-                <div className="btn btn-primary btn-sm">Make Admin</div>
+                {
+                    user?.role === 'admin'
+                        ? <button className="btn btn-primary btn-sm" disabled>Make Admin</button>
+                        : <button onClick={() => makeAdminHandler(user?._id)} className="btn btn-primary btn-sm">Make Admin</button>
+                }
+
             </td>
             <td>
-                <div className="btn btn-warning btn-sm">Delete</div>
+                <button onClick={() => handleDelete(user)} className="btn btn-warning btn-sm">Delete</button>
             </td>
         </tr>
     );
