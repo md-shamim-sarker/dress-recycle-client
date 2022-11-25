@@ -19,6 +19,16 @@ const UserContext = ({children}) => {
     const [user, setUser] = useState({});
     const [loading, setLoading] = useState(true);
     const [open, setOpen] = useState(false);
+    const [userInfo, setUserInfo] = useState(null);
+
+    useEffect(() => {
+        fetch(`http://localhost:5000/users/${user?.email}`)
+            .then(res => res.json())
+            .then(data => {
+                setUserInfo(data[0]);
+            })
+            .catch(err => console.log(err));
+    }, [user?.email]);
 
     // All Provider
     const googleProvider = new GoogleAuthProvider();
@@ -99,7 +109,8 @@ const UserContext = ({children}) => {
         signInWithEmailPassword,
         usersAddToDb,
         open,
-        setOpen
+        setOpen,
+        userInfo
     };
     return (
         <AuthContext.Provider value={authInfo}>

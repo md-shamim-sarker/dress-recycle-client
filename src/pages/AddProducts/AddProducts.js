@@ -3,7 +3,7 @@ import {useForm} from 'react-hook-form';
 import {AuthContext} from '../../contexts/UserContext';
 
 const AddProducts = () => {
-    const {user} = useContext(AuthContext);
+    const {user, userInfo} = useContext(AuthContext);
     const {register, handleSubmit} = useForm();
     const [categories, setCategories] = useState([]);
     const {displayName, email} = user;
@@ -15,6 +15,8 @@ const AddProducts = () => {
             .catch(err => console.log(err));
     }, []);
 
+
+
     const onSubmit = data => {
         const product = {
             categoryId: data.category.split(',')[0],
@@ -22,12 +24,12 @@ const AddProducts = () => {
             categoryImage: data.category.split(',')[2],
             condition: data.condition,
             description: data.description,
-            email: data.email,
-            fullName: data.fullName,
+            sellerName: data.fullName,
+            sellerEmail: data.email,
+            sellerPhone: data.phone,
             image: data.image,
             location: data.location,
             originalPrice: data.originalPrice,
-            phone: data.phone,
             productName: data.productName,
             resalePrice: data.resalePrice,
             yearsOfUse: data.yearsOfUse,
@@ -65,13 +67,13 @@ const AddProducts = () => {
                                     <label className="label">
                                         <span className="label-text">Seller Name</span>
                                     </label>
-                                    <input {...register("fullName")} type="text" value={displayName} disabled className="input input-bordered" />
+                                    <input {...register("fullName")} type="text" value={displayName} readOnly className="input input-bordered" />
                                 </div>
                                 <div className="form-control w-full lg:w-1/2">
                                     <label className="label">
                                         <span className="label-text">Email</span>
                                     </label>
-                                    <input {...register("email")} type="email" value={email} disabled className="input input-bordered" />
+                                    <input {...register("email")} type="email" value={email} readOnly className="input input-bordered" />
                                 </div>
                             </div>
 
@@ -80,7 +82,7 @@ const AddProducts = () => {
                                     <label className="label">
                                         <span className="label-text">Phone Number</span>
                                     </label>
-                                    <input {...register("phone")} type="text" placeholder='phone number' className="input input-bordered" />
+                                    <input {...register("phone")} type="text" value={userInfo?.phone} readOnly className="input input-bordered" />
                                 </div>
 
                                 <div className="form-control w-full lg:w-1/2">
