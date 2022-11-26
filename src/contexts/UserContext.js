@@ -8,7 +8,8 @@ import {
     onAuthStateChanged,
     createUserWithEmailAndPassword,
     updateProfile,
-    signInWithEmailAndPassword
+    signInWithEmailAndPassword,
+    deleteUser
 } from "firebase/auth";
 import app from '../firebase/Firebase.config';
 
@@ -63,6 +64,12 @@ const UserContext = ({children}) => {
         return signOut(auth);
     };
 
+    // Delete users
+    const userDelete = () => {
+        setLoading(true);
+        return deleteUser(auth.currentUser);
+    };
+
     // unsubscribe
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, currentUser => {
@@ -83,6 +90,7 @@ const UserContext = ({children}) => {
         createUser,
         updateUser,
         signInWithEmailPassword,
+        userDelete,
         open,
         setOpen,
         render,

@@ -1,6 +1,20 @@
-import React from 'react';
+import React, {useContext} from 'react';
+import {AuthContext} from '../../contexts/UserContext';
 
 const MyProduct = ({myProduct, sl}) => {
+    const {render, setRender} = useContext(AuthContext);
+    // console.log(myProduct);
+
+    const advertiseHandler = product => {
+        console.log(product._id);
+        fetch(`http://localhost:5000/products/advertise2/${product._id}`, {
+            method: 'PUT',
+        }).then(() => {
+            setRender(!render);
+            alert("Successfull!!");
+        }).catch(err => console.log(err));
+    };
+
     return (
         <tr>
             <th>
@@ -20,14 +34,15 @@ const MyProduct = ({myProduct, sl}) => {
             <td>{myProduct?.productName}</td>
             <td>{myProduct?.resalePrice} Taka</td>
             <td>
-                {/* <div className="btn btn-primary btn-sm">Available</div> */}
-                <select className="select select-bordered w-full text-center">
-                    <option value={false}>Available</option>
-                    <option value={true}>Soldout</option>
-                </select>
+                <div className="btn btn-primary btn-sm">Available</div>
             </td>
             <td>
-                <div className="btn btn-primary btn-sm">Advertise</div>
+                {
+                    myProduct?.advertise
+                        ? <button disabled className="btn btn-primary btn-sm">Advertise</button>
+                        : <button onClick={() => advertiseHandler(myProduct)} className="btn btn-primary btn-sm">Advertise</button>
+                }
+
             </td>
             <td>
                 <div className="btn btn-primary btn-sm">Update</div>

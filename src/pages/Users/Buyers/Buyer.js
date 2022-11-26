@@ -2,7 +2,7 @@ import React, {useContext} from 'react';
 import {AuthContext} from '../../../contexts/UserContext';
 
 const Buyer = ({buyer, sl}) => {
-    const {render, setRender} = useContext(AuthContext);
+    const {render, setRender, userDelete} = useContext(AuthContext);
 
     const makeAdminHandler = user => {
         fetch(`http://localhost:5000/users/${user._id}`, {
@@ -20,6 +20,7 @@ const Buyer = ({buyer, sl}) => {
             .then(res => res.json())
             .then(() => {
                 setRender(!render);
+                userDelete().then(() => {}).catch();
                 alert("Delete Successfully!!!");
             })
             .catch(err => console.log(err));

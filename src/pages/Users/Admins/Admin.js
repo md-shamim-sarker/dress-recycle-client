@@ -2,7 +2,7 @@ import React, {useContext} from 'react';
 import {AuthContext} from '../../../contexts/UserContext';
 
 const Admin = ({admin, sl}) => {
-    const {render, setRender} = useContext(AuthContext);
+    const {render, setRender, userDelete} = useContext(AuthContext);
 
     const handleDelete = user => {
         fetch(`http://localhost:5000/users/${user._id}`, {
@@ -11,6 +11,7 @@ const Admin = ({admin, sl}) => {
             .then(res => res.json())
             .then(() => {
                 setRender(!render);
+                userDelete().then(() => {}).catch();
                 alert("Delete Successfully!!!");
             })
             .catch(err => console.log(err));

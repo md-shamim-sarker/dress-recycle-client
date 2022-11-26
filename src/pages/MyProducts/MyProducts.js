@@ -3,7 +3,7 @@ import {AuthContext} from '../../contexts/UserContext';
 import MyProduct from './MyProduct';
 
 const MyProducts = () => {
-    const {user} = useContext(AuthContext);
+    const {user, render} = useContext(AuthContext);
     const [myProducts, setMyProducts] = useState([]);
 
     useEffect(() => {
@@ -11,7 +11,7 @@ const MyProducts = () => {
             .then(res => res.json())
             .then(data => setMyProducts(data))
             .catch(err => console.log(err));
-    }, [user?.email]);
+    }, [user?.email], render);
 
     return (
         <div>

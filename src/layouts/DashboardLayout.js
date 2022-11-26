@@ -14,16 +14,16 @@ const DashboardLayout = () => {
                 </div>
                 <div className="drawer-side border-r">
                     <label htmlFor="dashboard-drawer" className="drawer-overlay"></label>
-                    <ul className="menu p-4 w-full bg-base-100 text-base-content">
-                        {/* <li><NavLink to={"/dashboard/users"}>All Users</NavLink></li> */}
-                        <li><NavLink to={"/dashboard/role/admins"}>All Admins</NavLink></li>
+                    <ul className="menu p-4 w-60 bg-base-100 text-base-content gap-y-2">
                         <li><NavLink to={"/dashboard/role/sellers"}>All Sellers</NavLink></li>
                         <li><NavLink to={"/dashboard/role/buyers"}>All Buyers</NavLink></li>
-                        <li><NavLink to={"/dashboard/myOrders"}>My Orders</NavLink></li>
+                        <li><NavLink to={"/dashboard/reportedItems"}>Reported Items</NavLink></li>
+
                         <li><NavLink to={"/dashboard/addProducts"}>Add Products</NavLink></li>
                         <li><NavLink to={"/dashboard/myProducts"}>My Products</NavLink></li>
+
+                        <li><NavLink to={"/dashboard/myOrders"}>My Orders</NavLink></li>
                         <li><NavLink to={"/dashboard/myWishList"}>My Wishlist</NavLink></li>
-                        <li><NavLink to={"/dashboard/reportedItems"}>Reported Items</NavLink></li>
                     </ul>
                 </div>
             </div>

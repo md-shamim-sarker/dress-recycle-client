@@ -3,7 +3,6 @@ import DashboardLayout from "../layouts/DashboardLayout";
 import Main from "../layouts/Main";
 import AddProducts from "../pages/Home/Banner/AddProducts/AddProducts";
 import Blog from "../pages/Blog/Blog";
-import Dashboard from "../pages/Dashboard/Dashboard";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import Home from "../pages/Home/Home/Home";
 import Login from "../pages/Login/Login";
@@ -53,10 +52,6 @@ const router = createBrowserRouter([
         children: [
             {
                 path: "/dashboard",
-                element: <Dashboard></Dashboard>
-            },
-            {
-                path: "/dashboard/role/admins",
                 element: <PrivateRoute><Admins></Admins></PrivateRoute>
             },
             {

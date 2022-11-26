@@ -1,29 +1,23 @@
-import React, {useContext} from 'react';
+import React, {useEffect, useState} from 'react';
 import {GiEternalLove} from 'react-icons/gi';
+import {GoVerified} from 'react-icons/go';
 // import {GoVerified} from 'react-icons/go';
 import {MdOutlineReportProblem} from 'react-icons/md';
-import {AuthContext} from '../../contexts/UserContext';
 
 const Product = ({product}) => {
-    const {user} = useContext(AuthContext);
-    // const [userInfo, setUserInfo] = useState();
+    const [userInfo, setUserInfo] = useState();
     const productId = product._id;
 
-    // let email = user?.email;
-    // useEffect(() => {
-    //     if(email) {
-    //         fetch(`http://localhost:5000/users/${email}`)
-    //             .then((res) => res.json())
-    //             .then(data => setUserInfo(data))
-    //             .catch(err => console.log(err.message));
-    //     }
-    // }, [email]);
-
-    // console.log(userInfo);
+    useEffect(() => {
+        fetch(`http://localhost:5000/users/${product.sellerEmail}`)
+            .then((res) => res.json())
+            .then(data => setUserInfo(data))
+            .catch(err => console.log(err.message));
+    }, [product.sellerEmail]);
 
     const wishList = {
-        userName: user.displayName,
-        userEmail: user.email,
+        userName: product.sellerName,
+        userEmail: product.sellerEmail,
         productId: product._id,
         productName: product.productName,
         productImage: product.image,
@@ -75,13 +69,12 @@ const Product = ({product}) => {
                 <div>
                     <div className='text-lg flex items-center gap-2'>
                         <span><strong>Seller Name:</strong> {product.sellerName}</span>
-                        {/* <span>
+                        <span>
                             {
                                 userInfo?.isVerified
-                                    ? <GoVerified className='text-blue-500' title='Verified'></GoVerified>
-                                    : <GoVerified className='text-gray-500' title='Not Verified'></GoVerified>
+                                && <GoVerified className='text-blue-500' title='Verified'></GoVerified>
                             }
-                        </span> */}
+                        </span>
                     </div> <br />
                     <strong>Location:</strong> {product.location} <br />
                     <strong>Original Price:</strong> <strike>{product.originalPrice}</strike> TK <br />
