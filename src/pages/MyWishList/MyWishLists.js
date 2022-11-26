@@ -4,13 +4,40 @@ import {AuthContext} from '../../contexts/UserContext';
 import MyWishList from './MyWishList';
 
 const MyWishLists = () => {
-    const {user} = useContext(AuthContext);
+    const {user, dataAddToDb} = useContext(AuthContext);
     const [myWishLists, setMyWishLists] = useState([]);
-    const [modalInfo, setModalInfo] = useState({});
+    const [modalInfo, setModalInfo] = useState('');
     const {register, handleSubmit} = useForm();
 
+    const modalInfoHandler = (product) => {
+
+        const modalInfos = {
+            userName: user?.displayName,
+            email: user?.email,
+            productId: product._id,
+            productName: product.productName,
+            price: product.productPrice + ' Taka',
+            date: Date().slice(4, 24)
+        };
+        setModalInfo(modalInfos);
+    };
     const onSubmit = data => {
-        console.log(data);
+        const orders = {
+            userName: modalInfo.userName,
+            email: modalInfo.email,
+            phone: data.phone,
+            productName: modalInfo.productName,
+            price: modalInfo.price,
+            meetingLocation: data.meetingLocation,
+            productId: modalInfo.productId,
+            orderDate: modalInfo.date
+        };
+        console.log(orders);
+        dataAddToDb(orders, 'http://localhost:5000/orders')
+            .then(() => {
+                alert("Successfull!!!");
+            })
+            .catch(err => console.log(err));
     };
 
     useEffect(() => {
@@ -43,6 +70,7 @@ const MyWishLists = () => {
                                     myWishList={myWishList}
                                     sl={sl + 1}
                                     setModalInfo={setModalInfo}
+                                    modalInfoHandler={modalInfoHandler}
                                 ></MyWishList>)
                             }
                         </tbody>
@@ -59,11 +87,11 @@ const MyWishLists = () => {
 
                     <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-y-3 mt-3'>
                         <div className="form-control w-full">
-                            <input {...register("userName")} type="text" value={modalInfo.userName} className="input input-bordered w-full" />
+                            <input {...register("userName")} type="text" defaultValue={modalInfo.userName} readOnly className="input input-bordered w-full" />
                         </div>
 
                         <div className="form-control w-full">
-                            <input {...register("email")} type="text" value={modalInfo.email} className="input input-bordered w-full" />
+                            <input {...register("email")} type="text" defaultValue={modalInfo.email} readOnly className="input input-bordered w-full" />
                         </div>
 
                         <div className="form-control w-full">
@@ -71,11 +99,11 @@ const MyWishLists = () => {
                         </div>
 
                         <div className="form-control w-full">
-                            <input {...register("product")} type="text" value={modalInfo.productName} className="input input-bordered w-full" />
+                            <input {...register("product")} type="text" defaultValue={modalInfo.productName} readOnly className="input input-bordered w-full" />
                         </div>
 
                         <div className="form-control w-full">
-                            <input {...register("price")} type="text" value={`${modalInfo.price} Taka`} className="input input-bordered w-full" />
+                            <input {...register("price")} type="text" defaultValue={modalInfo.price} readOnly className="input input-bordered w-full" />
                         </div>
 
                         <div className="form-control w-full">

@@ -81,6 +81,16 @@ const UserContext = ({children}) => {
         };
     }, []);
 
+    const dataAddToDb = (data, url) => {
+        return fetch(url, {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+    };
+
     const authInfo = {
         user,
         signInWithGoogle,
@@ -94,7 +104,8 @@ const UserContext = ({children}) => {
         open,
         setOpen,
         render,
-        setRender
+        setRender,
+        dataAddToDb
     };
     return (
         <AuthContext.Provider value={authInfo}>
