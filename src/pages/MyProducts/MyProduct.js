@@ -1,9 +1,9 @@
 import React, {useContext} from 'react';
+import {Link} from 'react-router-dom';
 import {AuthContext} from '../../contexts/UserContext';
 
 const MyProduct = ({myProduct, sl}) => {
     const {render, setRender} = useContext(AuthContext);
-    // console.log(myProduct);
 
     const advertiseHandler = product => {
         console.log(product._id);
@@ -45,7 +45,7 @@ const MyProduct = ({myProduct, sl}) => {
 
             </td>
             <td>
-                <div className="btn btn-primary btn-sm">Update</div>
+                <Link to={`/dashboard/update/${myProduct._id}`} className="btn btn-primary btn-sm">Update</Link>
             </td>
             <td>
                 <div className="btn btn-warning btn-sm">Delete</div>
@@ -53,5 +53,4 @@ const MyProduct = ({myProduct, sl}) => {
         </tr>
     );
 };
-
 export default MyProduct;

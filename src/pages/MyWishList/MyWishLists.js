@@ -25,7 +25,7 @@ const MyWishLists = () => {
                             <th>Product Name</th>
                             <th>Price</th>
                             <th>Cancel</th>
-                            <th>Book Now</th>
+                            <th>Order Now</th>
                         </tr>
                     </thead>
                     <tbody>

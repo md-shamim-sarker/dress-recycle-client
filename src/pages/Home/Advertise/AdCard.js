@@ -8,7 +8,7 @@ const AdCard = ({adItem}) => {
                 <h2 className="card-title">{adItem.productName}</h2>
                 <p>{adItem.description.slice(0, 100)}...</p>
                 <div className="card-actions justify-end">
-                    <button className="btn btn-primary w-full">Book Now</button>
+                    <button className="btn btn-primary w-full">Order Now</button>
                 </div>
             </div>
         </div>

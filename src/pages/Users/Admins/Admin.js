@@ -40,7 +40,6 @@ const Admin = ({admin, sl}) => {
                                     ? <img src={admin?.image} alt="Avatar Tailwind CSS Component" />
                                     : <img src='https://simg.nicepng.com/png/small/301-3012856_account-user-profile-avatar-comments-free-image-user.png' alt="Avatar Tailwind CSS Component" />
                             }
-
                         </div>
                     </div>
                 </div>

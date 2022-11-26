@@ -23,7 +23,7 @@ const MyWishList = ({myWishList, sl}) => {
                 <div className="btn btn-primary btn-sm">Cancel</div>
             </td>
             <td>
-                <div className="btn btn-primary btn-sm">Book Now</div>
+                <div className="btn btn-primary btn-sm">Order Now</div>
             </td>
         </tr>
     );

@@ -16,6 +16,7 @@ import ReportedItems from "../pages/ReportedItems/ReportedItems";
 import Admins from "../pages/Users/Admins/Admins";
 import Sellers from "../pages/Users/Sellers/Sellers";
 import Buyers from "../pages/Users/Buyers/Buyers";
+import UpdateProducts from "../pages/UpdateProducts/UpdateProducts";
 
 const router = createBrowserRouter([
     {
@@ -81,6 +82,11 @@ const router = createBrowserRouter([
             {
                 path: "/dashboard/reportedItems",
                 element: <PrivateRoute><ReportedItems></ReportedItems></PrivateRoute>
+            },
+            {
+                path: "/dashboard/update/:id",
+                loader: ({params}) => fetch(`http://localhost:5000/products/id/${params.id}`),
+                element: <PrivateRoute><UpdateProducts></UpdateProducts></PrivateRoute>
             },
         ]
     }

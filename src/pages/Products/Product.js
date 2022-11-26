@@ -85,7 +85,7 @@ const Product = ({product}) => {
 
                 <p>{product.description}</p>
                 <div className="card-actions justify-end">
-                    <button className="btn btn-primary w-full">Book Now</button>
+                    <button className="btn btn-primary w-full">Order Now</button>
                 </div>
             </div>
         </div>

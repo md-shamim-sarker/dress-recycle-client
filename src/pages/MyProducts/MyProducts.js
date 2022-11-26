@@ -11,7 +11,7 @@ const MyProducts = () => {
             .then(res => res.json())
             .then(data => setMyProducts(data))
             .catch(err => console.log(err));
-    }, [user?.email], render);
+    }, [user?.email, render]);
 
     return (
         <div>
