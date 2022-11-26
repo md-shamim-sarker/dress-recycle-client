@@ -1,15 +1,17 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
+import {AuthContext} from '../../../contexts/UserContext';
 import Admin from './Admin';
 
 const Admins = () => {
     const [admins, setAdmins] = useState([]);
+    const {render} = useContext(AuthContext);
 
     useEffect(() => {
-        fetch('http://localhost:5000/users/role/admin')
+        fetch('http://localhost:5000/users/role2/admin')
             .then(res => res.json())
             .then(data => setAdmins(data))
             .catch(err => console.log(err));
-    }, []);
+    }, [render]);
 
     return (
         <div>

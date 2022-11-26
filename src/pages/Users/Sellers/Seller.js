@@ -3,10 +3,10 @@ import {AuthContext} from '../../../contexts/UserContext';
 import {GoVerified} from 'react-icons/go';
 
 const Seller = ({seller, sl}) => {
-    const {render, setRender, userDelete} = useContext(AuthContext);
+    const {render, setRender} = useContext(AuthContext);
 
     const makeAdminHandler = user => {
-        fetch(`http://localhost:5000/users/${user._id}`, {
+        fetch(`http://localhost:5000/users/makeAdmin/${user._id}`, {
             method: 'PUT',
         }).then(() => {
             setRender(!render);
@@ -30,7 +30,6 @@ const Seller = ({seller, sl}) => {
             .then(res => res.json())
             .then(() => {
                 setRender(!render);
-                userDelete().then(() => {}).catch();
                 alert("Delete Successfully!!!");
             })
             .catch(err => console.log(err));

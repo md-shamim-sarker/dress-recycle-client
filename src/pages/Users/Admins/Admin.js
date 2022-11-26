@@ -2,7 +2,16 @@ import React, {useContext} from 'react';
 import {AuthContext} from '../../../contexts/UserContext';
 
 const Admin = ({admin, sl}) => {
-    const {render, setRender, userDelete} = useContext(AuthContext);
+    const {render, setRender} = useContext(AuthContext);
+
+    const cancelAdminHandler = user => {
+        fetch(`http://localhost:5000/users/cancelAdmin/${user._id}`, {
+            method: 'PUT',
+        }).then(() => {
+            setRender(!render);
+            alert("Cancel Admin Successfull!!!");
+        }).catch(err => console.log(err));
+    };
 
     const handleDelete = user => {
         fetch(`http://localhost:5000/users/${user._id}`, {
@@ -11,7 +20,6 @@ const Admin = ({admin, sl}) => {
             .then(res => res.json())
             .then(() => {
                 setRender(!render);
-                userDelete().then(() => {}).catch();
                 alert("Delete Successfully!!!");
             })
             .catch(err => console.log(err));
@@ -40,9 +48,21 @@ const Admin = ({admin, sl}) => {
             <td>{admin?.fullName}</td>
             <td>{admin?.phone}</td>
             <td>{admin?.email}</td>
-            <td>{admin?.role}</td>
             <td>
-                <button onClick={() => handleDelete(admin)} className="btn btn-warning btn-sm">Delete</button>
+                {
+                    admin?.role === 'admin' && admin?.isAdmin === true
+                        ? <button disabled className="btn btn-warning btn-sm">Cancel Admin</button>
+                        : <button onClick={() => cancelAdminHandler(admin)} className="btn btn-warning btn-sm">Cancel Admin</button>
+                }
+
+            </td>
+            <td>
+                {
+                    admin?.role === 'admin' && admin?.isAdmin === true
+                        ? <button disabled className="btn btn-warning btn-sm">Delete</button>
+                        : <button onClick={() => handleDelete(admin)} className="btn btn-warning btn-sm">Delete</button>
+                }
+
             </td>
         </tr>
     );

@@ -7,7 +7,7 @@ const Buyers = () => {
     const {render} = useContext(AuthContext);
 
     useEffect(() => {
-        fetch('http://localhost:5000/users/role/buyer')
+        fetch('http://localhost:5000/users/role2/buyer')
             .then(res => res.json())
             .then(data => setBuyers(data))
             .catch(err => console.log(err));

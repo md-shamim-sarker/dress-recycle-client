@@ -8,7 +8,7 @@ const Register = () => {
     const {
         createUser,
         updateUser,
-        signInWithEmailPassword,
+        // signInWithEmailPassword,
         logOut
     } = useContext(AuthContext);
 
@@ -20,6 +20,7 @@ const Register = () => {
             email: data.email,
             phone: data.phone,
             role: data.role,
+            isAdmin: false,
             date: Number(new Date()),
             isVerified: false,
             image: data.image
@@ -30,15 +31,13 @@ const Register = () => {
                 logOut().then().catch();
                 updateUser(data.fullName, data.image)
                     .then(() => {
-                        signInWithEmailPassword(data.email, data.password)
+                        usersAddToDb(user)
                             .then(() => {
-                                usersAddToDb(user)
-                                    .then(() => {
-                                        alert('Data Added Successfully!!');
-                                    })
-                                    .catch(err => console.log(err));
-                                console.log('Md. Shamim Sarker ', user);
-                            }).catch(err => console.log(err));
+                                alert('Data Added Successfully!!');
+                            })
+                            .catch(err => console.log(err));
+                        // signInWithEmailPassword(data.email, data.password)
+                        //     .then(() => {}).catch(err => console.log(err));
                     }).catch(err => console.log(err));
                 console.log(result.user);
             }).catch(err => console.log(err));
