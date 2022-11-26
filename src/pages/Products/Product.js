@@ -1,12 +1,28 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {GiEternalLove} from 'react-icons/gi';
 import {GoVerified} from 'react-icons/go';
 // import {GoVerified} from 'react-icons/go';
 import {MdOutlineReportProblem} from 'react-icons/md';
+import {AuthContext} from '../../contexts/UserContext';
 
-const Product = ({product}) => {
+const Product = ({product, setModalInfo}) => {
+    const {user} = useContext(AuthContext);
     const [userInfo, setUserInfo] = useState();
     const productId = product._id;
+
+    console.log(product);
+
+    const modalInfoHandler = () => {
+        const modalInfo = {
+            userName: user?.displayName,
+            email: user?.email,
+            productId: product._id,
+            productName: product.productName,
+            price: product.resalePrice,
+            date: Date().slice(4, 24)
+        };
+        setModalInfo(modalInfo);
+    };
 
     useEffect(() => {
         fetch(`http://localhost:5000/users/${product.sellerEmail}`)
@@ -83,9 +99,9 @@ const Product = ({product}) => {
                     <strong>Date & Time:</strong> {product.date} <br />
                 </div>
 
-                <p>{product.description}</p>
+                <p>{product.description.slice(0, 150)}.</p>
                 <div className="card-actions justify-end">
-                    <button className="btn btn-primary w-full">Order Now</button>
+                    <label onClick={modalInfoHandler} htmlFor="order-modal" className="btn btn-primary w-full">Order Now</label>
                 </div>
             </div>
         </div>
