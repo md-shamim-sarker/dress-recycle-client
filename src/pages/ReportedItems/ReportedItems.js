@@ -23,6 +23,7 @@ const ReportedItems = () => {
                             <th>Seller Name</th>
                             <th>Seller Email</th>
                             <th>Seller Phone</th>
+                            <th>Report Cancel</th>
                             <th>Delete</th>
                         </tr>
                     </thead>

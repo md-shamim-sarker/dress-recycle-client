@@ -1,7 +1,22 @@
-import React from 'react';
+import React, {useContext} from 'react';
+import {AuthContext} from '../../contexts/UserContext';
 
-const MyWishList = ({myWishList: product, sl, modalInfoHandler}) => {
-    // console.log(product);
+const MyWishList = ({myWishList: product, sl, modalHandler}) => {
+    const {render, setRender} = useContext(AuthContext);
+
+    const handleDelete = p => {
+        console.log(p._id);
+        fetch(`http://localhost:5000/wishLists/${p._id}`, {
+            method: 'DELETE'
+        })
+            .then(res => res.json())
+            .then(() => {
+                setRender(!render);
+                alert("Delete Successfully!!!");
+            })
+            .catch(err => console.log(err));
+    };
+
     return (
         <tr>
             <th>
@@ -21,10 +36,10 @@ const MyWishList = ({myWishList: product, sl, modalInfoHandler}) => {
             <td>{product?.productName}</td>
             <td>{product?.productPrice} Taka</td>
             <td>
-                <div className="btn btn-primary btn-sm">Cancel</div>
+                <button onClick={() => handleDelete(product)} className="btn btn-primary btn-sm">Cancel</button>
             </td>
             <td>
-                <label onClick={() => modalInfoHandler(product)} htmlFor="order-modal" className="btn btn-primary btn-sm">Order Now</label>
+                <label onClick={() => modalHandler(product)} htmlFor="order-modal" className="btn btn-primary btn-sm">Order Now</label>
             </td>
         </tr>
     );

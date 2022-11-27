@@ -24,6 +24,7 @@ const Admin = ({admin, sl}) => {
             })
             .catch(err => console.log(err));
     };
+
     return (
         <tr>
             <th>

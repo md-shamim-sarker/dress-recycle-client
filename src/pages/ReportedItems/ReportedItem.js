@@ -23,6 +23,9 @@ const ReportedItem = ({reportedItem, sl}) => {
             <td>{reportedItem?.sellerEmail}</td>
             <td>{reportedItem?.sellerPhone}</td>
             <td>
+                <button className="btn btn-primary btn-sm">Cancel</button>
+            </td>
+            <td>
                 <div className="btn btn-primary btn-sm">Delete</div>
             </td>
         </tr>

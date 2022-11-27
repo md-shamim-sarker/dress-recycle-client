@@ -1,51 +1,20 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {GiEternalLove} from 'react-icons/gi';
 import {GoVerified} from 'react-icons/go';
 import {MdOutlineReportProblem} from 'react-icons/md';
+import {AuthContext} from '../../../contexts/UserContext';
 
-const AdCard = ({adItem: product, modalInfoHandler}) => {
+const AdCard = ({adItem: product, modalHandler, wishListHandler, reportHandler}) => {
     const [userInfo, setUserInfo] = useState();
-    const productId = product._id;
-    // console.log("TEST ", userInfo);
-    // console.log(product);
+    const {render} = useContext(AuthContext);
 
     useEffect(() => {
         fetch(`http://localhost:5000/users/${product?.sellerEmail}`)
             .then((res) => res.json())
             .then(data => setUserInfo(data))
             .catch(err => console.log(err.message));
-    }, [product?.sellerEmail]);
+    }, [product?.sellerEmail, render]);
 
-    const wishList = {
-        userName: product.sellerName,
-        userEmail: product.sellerEmail,
-        productId: product._id,
-        productName: product.productName,
-        productImage: product.image,
-        productPrice: product.resalePrice,
-        wishDate: Date().slice(4, 24)
-    };
-
-    const wishListHandler = (wishList) => {
-        fetch('http://localhost:5000/wishLists', {
-            method: 'POST',
-            headers: {'content-type': 'application/json'},
-            body: JSON.stringify(wishList)
-        }).then(() => {
-            alert("Add to wishlist successfull!!");
-        }).catch(error => {
-            console.error(error.message);
-        });
-    };
-
-    const onUpdateHandler = (id) => {
-        fetch(`http://localhost:5000/products/${id}`, {
-            method: 'PUT',
-        }).then(() => {
-            alert(`Report to Admin Success for ${product.productName}`);
-        }).catch(err => console.log(err));
-    };
-    // console.log(adItem);
     return (
         <div className="card card-compact bg-base-100 shadow-xl">
             <figure><img src={product.image} alt="cloth" className='w-full' /></figure>
@@ -55,10 +24,10 @@ const AdCard = ({adItem: product, modalInfoHandler}) => {
                         {product.productName}
                     </h2>
                     <div className='flex gap-4 text-xl'>
-                        <button onClick={() => wishListHandler(wishList)}>
+                        <button onClick={() => wishListHandler(product)}>
                             <GiEternalLove title='Already add to wishlist' className='text-rose-600'></GiEternalLove>
                         </button>
-                        <button onClick={() => onUpdateHandler(productId)}>
+                        <button onClick={() => reportHandler(product?._id)}>
                             {
                                 product.reportToAdmin
                                     ? <MdOutlineReportProblem title='Already report to admin' className='text-orange-600'></MdOutlineReportProblem>
@@ -86,8 +55,7 @@ const AdCard = ({adItem: product, modalInfoHandler}) => {
 
                 <p>{product.description.slice(0, 150)}.</p>
                 <div className="card-actions justify-end">
-                    {/* <label htmlFor="order-modal" className="btn btn-primary w-full">Order Now</label> */}
-                    <label onClick={() => modalInfoHandler(product)} htmlFor="order-modal" className="btn btn-primary w-full">Order Now</label>
+                    <label onClick={() => modalHandler(product)} htmlFor="order-modal" className="btn btn-primary w-full">Order Now</label>
                 </div>
             </div>
         </div>
@@ -95,19 +63,3 @@ const AdCard = ({adItem: product, modalInfoHandler}) => {
 };
 
 export default AdCard;
-
-
-
-
-/*
-<div className="card card-compact bg-base-100 shadow-xl mb-20">
-            <figure><img src={adItem.image} alt="..." className='w-full' /></figure>
-            <div className="card-body">
-                <h2 className="card-title">{adItem.productName}</h2>
-                <p>{adItem.description.slice(0, 100)}...</p>
-                <div className="card-actions justify-end">
-                    <button className="btn btn-primary w-full">Order Now</button>
-                </div>
-            </div>
-        </div>
-*/
