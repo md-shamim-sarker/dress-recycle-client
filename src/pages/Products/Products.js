@@ -11,6 +11,14 @@ const Products = () => {
     const [product, setProduct] = useState(null);
     const categoryImage = products[0].categoryImage;
 
+    const reportHandler = (product) => {
+        fetch(`http://localhost:5000/products/report/${product._id}`, {
+            method: 'PUT',
+        }).then(() => {
+            alert(`Report to Admin Success!!!`);
+        }).catch(err => console.log(err));
+    };
+
     const wishListHandler = (product) => {
         const wishList = {
             userName: user?.displayName,
@@ -24,7 +32,6 @@ const Products = () => {
             productPrice: product.resalePrice,
             wishDate: Date().slice(4, 24)
         };
-
         fetch('http://localhost:5000/wishLists', {
             method: 'POST',
             headers: {'content-type': 'application/json'},
@@ -36,14 +43,12 @@ const Products = () => {
         });
     };
 
-
-
-
     const modalHandler = (product) => {
         const orderData = {
-            productName: product.productName,
-            productPrice: product.resalePrice + " TK",
             productId: product._id,
+            productName: product.productName,
+            productImage: product.image,
+            productPrice: product.resalePrice + " TK",
             orderDate: Date().slice(4, 24),
             sellerName: product.sellerName,
             sellerEmail: product.sellerEmail,
@@ -51,8 +56,6 @@ const Products = () => {
         };
         setProduct(orderData);
     };
-
-
 
     return (
         <>
@@ -64,6 +67,7 @@ const Products = () => {
                         product={product}
                         modalHandler={modalHandler}
                         wishListHandler={wishListHandler}
+                        reportHandler={reportHandler}
                     ></Product>)
                 }
             </div>

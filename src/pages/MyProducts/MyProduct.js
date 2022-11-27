@@ -1,19 +1,7 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import {Link} from 'react-router-dom';
-import {AuthContext} from '../../contexts/UserContext';
 
-const MyProduct = ({myProduct, sl}) => {
-    const {render, setRender} = useContext(AuthContext);
-
-    const advertiseHandler = product => {
-        console.log(product._id);
-        fetch(`http://localhost:5000/products/advertise2/${product._id}`, {
-            method: 'PUT',
-        }).then(() => {
-            setRender(!render);
-            alert("Successfull!!");
-        }).catch(err => console.log(err));
-    };
+const MyProduct = ({myProduct, sl, advertiseHandler, unAdvertiseHandler}) => {
 
     return (
         <tr>
@@ -39,10 +27,9 @@ const MyProduct = ({myProduct, sl}) => {
             <td>
                 {
                     myProduct?.advertise
-                        ? <button disabled className="btn btn-primary btn-sm">Advertise</button>
+                        ? <button onClick={() => unAdvertiseHandler(myProduct)} className="btn btn-primary btn-sm">Undvertise</button>
                         : <button onClick={() => advertiseHandler(myProduct)} className="btn btn-primary btn-sm">Advertise</button>
                 }
-
             </td>
             <td>
                 <Link to={`/dashboard/update/${myProduct._id}`} className="btn btn-primary btn-sm">Update</Link>

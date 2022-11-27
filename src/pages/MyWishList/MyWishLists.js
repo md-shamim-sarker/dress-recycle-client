@@ -4,9 +4,9 @@ import OrderModal from '../OrderModal/OrderModal';
 import MyWishList from './MyWishList';
 
 const MyWishLists = () => {
+    const {user, render, setRender} = useContext(AuthContext);
     const [products, setProducts] = useState([]);
     const [product, setProduct] = useState(null);
-    const {user, render} = useContext(AuthContext);
 
     useEffect(() => {
         fetch(`http://localhost:5000/wishLists/${user?.email}`)
@@ -17,13 +17,24 @@ const MyWishLists = () => {
             .catch(err => console.log(err));
     }, [user?.email, render]);
 
-    console.log(products);
+    const handleDelete = product => {
+        fetch(`http://localhost:5000/wishLists/${product._id}`, {
+            method: 'DELETE'
+        })
+            .then(res => res.json())
+            .then(() => {
+                setRender(!render);
+                alert("Delete Successfully!!!");
+            })
+            .catch(err => console.log(err));
+    };
 
     const modalHandler = (product) => {
         const orderData = {
-            productName: product.productName,
-            productPrice: product.productPrice + " TK",
             productId: product.productId,
+            productName: product.productName,
+            productImage: product.productImage,
+            productPrice: product.productPrice + " TK",
             orderDate: Date().slice(4, 24),
             sellerName: product.sellerName,
             sellerEmail: product.sellerEmail,
@@ -55,6 +66,7 @@ const MyWishLists = () => {
                                     myWishList={myWishList}
                                     sl={sl + 1}
                                     modalHandler={modalHandler}
+                                    handleDelete={handleDelete}
                                 ></MyWishList>)
                             }
                         </tbody>

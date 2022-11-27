@@ -1,14 +1,26 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
+import {AuthContext} from '../../contexts/UserContext';
 import ReportedItem from './ReportedItem';
 
 const ReportedItems = () => {
     const [reportedItems, setReportedItems] = useState([]);
+    const {render, setRender} = useContext(AuthContext);
+
     useEffect(() => {
         fetch('http://localhost:5000/products/report/true')
             .then(res => res.json())
             .then(data => setReportedItems(data))
             .catch(err => console.log(err));
-    }, []);
+    }, [render]);
+
+    const unReportHandler = (product) => {
+        fetch(`http://localhost:5000/products/unreport/${product._id}`, {
+            method: 'PUT',
+        }).then(() => {
+            setRender(!render);
+            alert(`Unreport to Admin Success for!!!`);
+        }).catch(err => console.log(err));
+    };
 
     return (
         <div>
@@ -33,6 +45,7 @@ const ReportedItems = () => {
                                 key={reportedItem?._id}
                                 reportedItem={reportedItem}
                                 sl={sl + 1}
+                                unReportHandler={unReportHandler}
                             ></ReportedItem>)
                         }
                     </tbody>

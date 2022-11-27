@@ -1,7 +1,7 @@
 import React from 'react';
 
-const MyWishList = ({myWishList: product, sl, modalHandler, handleDelete}) => {
-    console.log('###', product);
+const MyOrder = ({sl, product, handleDelete}) => {
+    // console.log('Shamim', product);
     return (
         <tr>
             <th>
@@ -21,13 +21,13 @@ const MyWishList = ({myWishList: product, sl, modalHandler, handleDelete}) => {
             <td>{product?.productName}</td>
             <td>{product?.productPrice} Taka</td>
             <td>
-                <button onClick={() => handleDelete(product)} className="btn btn-primary btn-sm">Cancel</button>
+                <button onClick={() => handleDelete(product)} className="btn btn-primary btn-sm">Cancel Order</button>
             </td>
             <td>
-                <label onClick={() => modalHandler(product)} htmlFor="order-modal" className="btn btn-primary btn-sm">Order Now</label>
+                <label htmlFor="order-modal" className="btn btn-primary btn-sm">Payment</label>
             </td>
         </tr>
     );
 };
 
-export default MyWishList;
+export default MyOrder;

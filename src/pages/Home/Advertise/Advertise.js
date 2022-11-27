@@ -7,8 +7,6 @@ const Advertise = () => {
     const {user} = useContext(AuthContext);
     const [products, setProducts] = useState([]);
     const [product, setProduct] = useState(null);
-    const {render, setRender} = useContext(AuthContext);
-
 
     useEffect(() => {
         fetch('http://localhost:5000/products/all/advertise')
@@ -42,21 +40,20 @@ const Advertise = () => {
         });
     };
 
-
     const reportHandler = (product) => {
-        fetch(`http://localhost:5000/products/${product._id}`, {
+        fetch(`http://localhost:5000/products/report/${product._id}`, {
             method: 'PUT',
         }).then(() => {
-            setRender(!render);
-            alert(`Report to Admin Success for ${product.productName}`);
+            alert(`Report to Admin Success!!!`);
         }).catch(err => console.log(err));
     };
 
     const modalHandler = (product) => {
         const orderData = {
-            productName: product.productName,
-            productPrice: product.resalePrice + " TK",
             productId: product._id,
+            productName: product.productName,
+            productImage: product.image,
+            productPrice: product.resalePrice + " TK",
             orderDate: Date().slice(4, 24),
             sellerName: product.sellerName,
             sellerEmail: product.sellerEmail,
@@ -67,7 +64,10 @@ const Advertise = () => {
 
     return (
         <>
-            <h2 className='text-4xl text-blue-600 font-bold text-center my-10'>Advertisement</h2>
+            {
+                products.length && <h2 className='text-4xl text-blue-600 font-bold text-center my-10'>Advertisement</h2>
+            }
+
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10'>
                 {
                     products.map(adItem => <AdCard

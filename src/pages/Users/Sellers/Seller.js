@@ -1,40 +1,16 @@
-import React, {useContext} from 'react';
-import {AuthContext} from '../../../contexts/UserContext';
+import React from 'react';
 import {GoVerified} from 'react-icons/go';
 
-const Seller = ({seller, sl}) => {
-    const {render, setRender} = useContext(AuthContext);
-
-    const makeAdminHandler = user => {
-        fetch(`http://localhost:5000/users/makeAdmin/${user._id}`, {
-            method: 'PUT',
-        }).then(() => {
-            setRender(!render);
-            alert("Make Admin Successfull!!!");
-        }).catch(err => console.log(err));
-    };
-
-    const verifyHandler = user => {
-        fetch(`http://localhost:5000/users/seller/${user._id}`, {
-            method: 'PUT',
-        }).then(() => {
-            setRender(!render);
-            alert("Verified Successfull!!!");
-        }).catch(err => console.log(err));
-    };
-
-    const handleDelete = user => {
-        fetch(`http://localhost:5000/users/${user._id}`, {
-            method: 'DELETE'
-        })
-            .then(res => res.json())
-            .then(() => {
-                setRender(!render);
-                alert("Delete Successfully!!!");
-            })
-            .catch(err => console.log(err));
-    };
-
+const Seller = ({
+    sl,
+    seller,
+    makeAdminHandler,
+    cancelAdminHandler,
+    verifyHandler,
+    unVerifyHandler,
+    handleDelete
+}) => {
+    // console.log("SELLER", seller);
     return (
         <tr>
             <th>
@@ -70,12 +46,17 @@ const Seller = ({seller, sl}) => {
             <td>
                 {
                     seller?.isVerified
-                        ? <button disabled className="btn bg-green-500 btn-sm">Verify</button>
+                        ? <button onClick={() => unVerifyHandler(seller)} className="btn bg-green-500 btn-sm">UnVerify</button>
                         : <button onClick={() => verifyHandler(seller)} className="btn bg-green-500 btn-sm">Verify</button>
                 }
             </td>
             <td>
-                <button onClick={() => makeAdminHandler(seller)} className="btn btn-primary btn-sm">Make Admin</button>
+                {
+                    seller?.isAdmin
+                        ? <button onClick={() => cancelAdminHandler(seller)} className="btn btn-primary btn-sm">Cancel Admin</button>
+                        : <button onClick={() => makeAdminHandler(seller)} className="btn btn-primary btn-sm">Make Admin</button>
+                }
+
             </td>
             <td>
                 <button onClick={() => handleDelete(seller)} className="btn btn-warning btn-sm">Delete</button>

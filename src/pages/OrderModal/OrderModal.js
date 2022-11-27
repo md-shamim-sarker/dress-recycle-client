@@ -3,7 +3,7 @@ import {AuthContext} from '../../contexts/UserContext';
 
 const OrderModal = ({product, setProduct}) => {
     const {user, dataAddToDb} = useContext(AuthContext);
-
+    // console.log('TEST', product);
     const onSubmitHandler = event => {
         event.preventDefault();
         const form = event.target;
@@ -14,12 +14,13 @@ const OrderModal = ({product, setProduct}) => {
         const sellerEmail = product.sellerEmail;
         const sellerPhone = product.sellerPhone;
         const productId = product.productId;
+        const productImage = product.productImage;
         const productName = form.product.value;
         const productPrice = form.price.value;
         const meetingLocation = form.meetingLocation.value;
         const orderDate = Date().slice(4, 24);
 
-        const orders = {userName, userEmail, userPhone, sellerName, sellerEmail, sellerPhone, productId, productName, productPrice, meetingLocation, orderDate};
+        const orders = {userName, userEmail, userPhone, sellerName, sellerEmail, sellerPhone, productId, productName, productImage, productPrice, meetingLocation, orderDate};
         console.log(orders);
 
         dataAddToDb(orders, 'http://localhost:5000/orders')

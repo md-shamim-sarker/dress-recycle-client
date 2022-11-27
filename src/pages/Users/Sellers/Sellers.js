@@ -4,7 +4,53 @@ import Seller from './Seller';
 
 const Sellers = () => {
     const [sellers, setSellers] = useState([]);
-    const {render} = useContext(AuthContext);
+    const {render, setRender} = useContext(AuthContext);
+
+    const makeAdminHandler = user => {
+        fetch(`http://localhost:5000/users/makeAdmin/${user._id}`, {
+            method: 'PUT',
+        }).then(() => {
+            setRender(!render);
+        }).catch(err => console.log(err));
+    };
+
+    const cancelAdminHandler = user => {
+        fetch(`http://localhost:5000/users/cancelAdmin/${user._id}`, {
+            method: 'PUT',
+        }).then(() => {
+            setRender(!render);
+        }).catch(err => console.log(err));
+    };
+
+    const verifyHandler = user => {
+        fetch(`http://localhost:5000/users/seller/${user._id}`, {
+            method: 'PUT',
+        }).then(() => {
+            setRender(!render);
+        }).catch(err => console.log(err));
+    };
+
+    const unVerifyHandler = user => {
+        fetch(`http://localhost:5000/users/seller2/${user._id}`, {
+            method: 'PUT',
+        }).then(() => {
+            setRender(!render);
+        }).catch(err => console.log(err));
+    };
+
+    const handleDelete = user => {
+        const confirmation = window.confirm('You are going to delete a user!!!');
+        confirmation &&
+            fetch(`http://localhost:5000/users/${user._id}`, {
+                method: 'DELETE'
+            })
+                .then(res => res.json())
+                .then(() => {
+                    setRender(!render);
+                    alert("Delete Successfully!!!");
+                })
+                .catch(err => console.log(err));
+    };
 
     useEffect(() => {
         fetch('http://localhost:5000/users/role2/seller')
@@ -37,6 +83,11 @@ const Sellers = () => {
                                 key={seller?._id}
                                 seller={seller}
                                 sl={sl + 1}
+                                makeAdminHandler={makeAdminHandler}
+                                cancelAdminHandler={cancelAdminHandler}
+                                verifyHandler={verifyHandler}
+                                unVerifyHandler={unVerifyHandler}
+                                handleDelete={handleDelete}
                             ></Seller>)
                         }
                     </tbody>

@@ -15,8 +15,6 @@ const AddProducts = () => {
             .catch(err => console.log(err));
     }, []);
 
-
-
     const onSubmit = data => {
         const product = {
             categoryId: data.category.split(',')[0],

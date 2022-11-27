@@ -27,12 +27,8 @@ const AdCard = ({adItem: product, modalHandler, wishListHandler, reportHandler})
                         <button onClick={() => wishListHandler(product)}>
                             <GiEternalLove title='Already add to wishlist' className='text-rose-600'></GiEternalLove>
                         </button>
-                        <button onClick={() => reportHandler(product?._id)}>
-                            {
-                                product.reportToAdmin
-                                    ? <MdOutlineReportProblem title='Already report to admin' className='text-orange-600'></MdOutlineReportProblem>
-                                    : <MdOutlineReportProblem title='Report to Admin'></MdOutlineReportProblem>
-                            }
+                        <button onClick={() => reportHandler(product)}>
+                            <MdOutlineReportProblem title='Already report to admin' className='text-orange-600'></MdOutlineReportProblem>
                         </button>
                     </div>
                 </div>
