@@ -37,7 +37,11 @@ const Admins = () => {
     };
 
     useEffect(() => {
-        fetch('http://localhost:5000/users/role2/admin')
+        fetch('http://localhost:5000/users/role2/admin', {
+            headers: {
+                authorization: localStorage.getItem('token')
+            }
+        })
             .then(res => res.json())
             .then(data => setAdmins(data))
             .catch(err => console.log(err));

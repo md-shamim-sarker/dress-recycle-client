@@ -55,7 +55,11 @@ const Sellers = () => {
     };
 
     useEffect(() => {
-        fetch('http://localhost:5000/users/role2/seller')
+        fetch('http://localhost:5000/users/role2/seller', {
+            headers: {
+                authorization: localStorage.getItem('token')
+            }
+        })
             .then(res => res.json())
             .then(data => setSellers(data))
             .catch(err => console.log(err));

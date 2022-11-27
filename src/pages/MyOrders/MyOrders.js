@@ -20,7 +20,11 @@ const MyOrders = () => {
     };
 
     useEffect(() => {
-        fetch(`http://localhost:5000/orders/${user?.email}`)
+        fetch(`http://localhost:5000/orders/${user?.email}`, {
+            headers: {
+                authorization: localStorage.getItem('token')
+            }
+        })
             .then(res => res.json())
             .then(data => {
                 setProducts(data);

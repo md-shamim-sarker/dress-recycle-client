@@ -75,12 +75,30 @@ const UserContext = ({children}) => {
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, currentUser => {
             setUser(currentUser);
+
+            tokenHandler({user: currentUser?.email})
+                .then(res => res.json())
+                .then(data => {
+                    localStorage.setItem('token', data.token);
+                });
+
             setLoading(false);
         });
         return () => {
             unsubscribe();
         };
     }, []);
+
+    // Token handler
+    const tokenHandler = (currentUser) => {
+        return fetch('http://localhost:5000/jwt', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(currentUser)
+        });
+    };
 
     // Data add to db
     const dataAddToDb = (data, url) => {
@@ -91,6 +109,11 @@ const UserContext = ({children}) => {
             },
             body: JSON.stringify(data)
         });
+    };
+
+    // User Check in db
+    const isUserExist = (email) => {
+        return fetch(`http://localhost:5000/users2/${email}`);
     };
 
     // Delete Confirmation
@@ -134,6 +157,7 @@ const UserContext = ({children}) => {
         render,
         setRender,
         dataAddToDb,
+        isUserExist,
         deleteConfirmation,
         reportConfirmation
     };

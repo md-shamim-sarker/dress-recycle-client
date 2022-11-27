@@ -10,7 +10,11 @@ const MyWishLists = () => {
     const [product, setProduct] = useState(null);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/wishLists/${user?.email}`)
+        fetch(`http://localhost:5000/wishLists/${user?.email}`, {
+            headers: {
+                authorization: localStorage.getItem('token')
+            }
+        })
             .then(res => res.json())
             .then(data => {
                 setProducts(data);

@@ -17,6 +17,7 @@ import Admins from "../pages/Users/Admins/Admins";
 import Sellers from "../pages/Users/Sellers/Sellers";
 import Buyers from "../pages/Users/Buyers/Buyers";
 import UpdateProducts from "../pages/UpdateProducts/UpdateProducts";
+import Dashboard from "../pages/Dashboard/Dashboard";
 
 const router = createBrowserRouter([
     {
@@ -53,6 +54,10 @@ const router = createBrowserRouter([
         children: [
             {
                 path: "/dashboard",
+                element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>
+            },
+            {
+                path: "/dashboard/role/admins",
                 element: <PrivateRoute><Admins></Admins></PrivateRoute>
             },
             {

@@ -1,18 +1,23 @@
 import React, {useContext} from 'react';
 import login from '../../assets/login.jpg';
 import {useForm} from 'react-hook-form';
-import {Link} from 'react-router-dom';
+import {Link, useLocation, useNavigate} from 'react-router-dom';
 import {AuthContext} from '../../contexts/UserContext';
+import toast from 'react-hot-toast';
 
 const Register = () => {
     const {
         createUser,
         updateUser,
-        // signInWithEmailPassword,
-        logOut
+        signInWithEmailPassword,
+        logOut,
+        dataAddToDb
     } = useContext(AuthContext);
-
     const {register, handleSubmit, reset} = useForm();
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || "/";
+
     const onSubmit = data => {
         const user = {
             fullName: data.fullName,
@@ -27,35 +32,22 @@ const Register = () => {
 
         createUser(data.email, data.password)
             .then((result) => {
+                console.log(result);
                 logOut().then().catch();
                 updateUser(data.fullName, data.image)
                     .then(() => {
-                        usersAddToDb(user)
-                            .then(() => {
-                                alert('Data Added Successfully!!');
-                            })
-                            .catch(err => console.log(err));
-                        // signInWithEmailPassword(data.email, data.password)
-                        //     .then(() => {}).catch(err => console.log(err));
+                        dataAddToDb(user, 'http://localhost:5000/users')
+                            .then((result) => {
+                                if(result.ok) {
+                                    toast.success('This user is saved to database!');
+                                }
+                            }).catch(console.dir);
+                        signInWithEmailPassword(data.email, data.password)
+                            .then(() => {}).catch(err => console.log(err));
                     }).catch(err => console.log(err));
-                console.log(result.user);
+                navigate(from, {replace: true});
             }).catch(err => console.log(err));
         reset();
-    };
-
-    const usersAddToDb = async (user) => {
-        try {
-            await fetch('http://localhost:5000/users', {
-                method: 'POST',
-                headers: {
-                    'content-type': 'application/json'
-                },
-                body: JSON.stringify(user)
-            });
-            console.log('User Added Successfully!!!');
-        } catch(error) {
-            console.error(error.message);
-        }
     };
 
     return (

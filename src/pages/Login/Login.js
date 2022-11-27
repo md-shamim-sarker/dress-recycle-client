@@ -4,17 +4,21 @@ import {Link, useLocation, useNavigate} from 'react-router-dom';
 import login from '../../assets/login.jpg';
 import {useForm} from "react-hook-form";
 import {AuthContext} from '../../contexts/UserContext';
+import toast from 'react-hot-toast';
 
 const Login = () => {
     const {
         signInWithGoogle,
         signInWithFacebook,
         signInWithEmailPassword,
-        usersAddToDb
+        dataAddToDb,
+        isUserExist
     } = useContext(AuthContext);
+    const {register, handleSubmit} = useForm();
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || "/";
+
 
     const signInWithGoogleHandler = () => {
         signInWithGoogle()
@@ -29,18 +33,20 @@ const Login = () => {
                     date: Number(new Date()),
                     isAdmin: false
                 };
-                fetch(`http://localhost:5000/users/${user.email}`)
+
+                // Add to database
+                isUserExist(user.email)
                     .then(res => res.json())
                     .then(data => {
-                        if(data.length < 1) {
-                            usersAddToDb(user)
-                                .then(() => {
-                                    alert('User add successfully!!');
-                                }).catch(err => {
-                                    console.log(err);
-                                });
+                        if(data.length === 0) {
+                            dataAddToDb(user, 'http://localhost:5000/users')
+                                .then((result) => {
+                                    if(result.ok) {
+                                        toast.success('This user is saved to database!');
+                                    }
+                                }).catch(console.dir);
                         }
-                    }).catch(err => console.log(err));
+                    });
                 navigate(from, {replace: true});
             }).catch(err => {
                 console.log(err);
@@ -60,29 +66,32 @@ const Login = () => {
                     date: Number(new Date()),
                     isAdmin: false
                 };
-                fetch(`http://localhost:5000/users/${user.email}`)
+
+                // Add to database
+                isUserExist(user.email)
                     .then(res => res.json())
                     .then(data => {
-                        if(data.length < 1) {
-                            usersAddToDb(user)
-                                .then(() => {
-                                    alert('User add successfully!!');
-                                }).catch(err => {
-                                    console.log(err);
-                                });
+                        if(data.length === 0) {
+                            dataAddToDb(user, 'http://localhost:5000/users')
+                                .then((result) => {
+                                    if(result.ok) {
+                                        toast.success('This user is saved to database!');
+                                    }
+                                }).catch(console.dir);
                         }
-                    }).catch(err => console.log(err));
+                    });
                 navigate(from, {replace: true});
             }).catch(err => {
                 console.log(err);
             });
     };
 
-    const {register, handleSubmit} = useForm();
     const onSubmit = data => {
         signInWithEmailPassword(data.email, data.password)
             .then(result => {
-                console.log(result.user);
+                const user = result.user.displayName;
+                const email = result.user.email;
+                console.log({user, email});
                 navigate(from, {replace: true});
             }).catch(err => console.log(err));
     };

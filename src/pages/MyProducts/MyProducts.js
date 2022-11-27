@@ -8,7 +8,7 @@ const MyProducts = () => {
     const [myProducts, setMyProducts] = useState([]);
 
     const advertiseHandler = product => {
-        console.log(product._id);
+        // console.log(product._id);
         fetch(`http://localhost:5000/products/advertise2/${product._id}`, {
             method: 'PUT',
         }).then(() => {
@@ -18,7 +18,7 @@ const MyProducts = () => {
     };
 
     const unAdvertiseHandler = product => {
-        console.log(product._id);
+        // console.log(product._id);
         fetch(`http://localhost:5000/products/unAdvertise2/${product._id}`, {
             method: 'PUT',
         }).then(() => {
@@ -48,7 +48,11 @@ const MyProducts = () => {
     };
 
     useEffect(() => {
-        fetch(`http://localhost:5000/products/${user?.email}`)
+        fetch(`http://localhost:5000/products/${user?.email}`, {
+            headers: {
+                authorization: localStorage.getItem('token')
+            }
+        })
             .then(res => res.json())
             .then(data => setMyProducts(data))
             .catch(err => console.log(err));
@@ -73,6 +77,7 @@ const MyProducts = () => {
                     </thead>
                     <tbody>
                         {
+                            // myProducts.length > 0 &&
                             myProducts.map((myProduct, sl) => <MyProduct
                                 key={myProduct?._id}
                                 myProduct={myProduct}
