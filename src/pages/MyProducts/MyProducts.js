@@ -29,15 +29,21 @@ const MyProducts = () => {
 
     const handleDelete = product => {
         deleteConfirmation()
-            .then(() => {
-                fetch(`http://localhost:5000/products/${product._id}`, {
-                    method: 'DELETE'
-                })
-                    .then(res => res.json())
-                    .then(() => {
-                        setRender(!render);
+            .then((result) => {
+                if(result.isConfirmed) {
+                    fetch(`http://localhost:5000/products/${product._id}`, {
+                        method: 'DELETE'
                     })
-                    .catch(err => console.log(err));
+                        .then(res => res.json())
+                        .then(() => {
+                            toast.success('Successfully Deleted!');
+                            setRender(!render);
+                        })
+                        .catch(err => console.log(err));
+                } else {
+                    toast.success('Delete Cancel!');
+                }
+
             });
     };
 

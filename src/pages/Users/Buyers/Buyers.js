@@ -18,15 +18,21 @@ const Buyers = () => {
 
     const handleDelete = user => {
         deleteConfirmation()
-            .then(() => {
-                fetch(`http://localhost:5000/users/${user._id}`, {
-                    method: 'DELETE'
-                })
-                    .then(res => res.json())
-                    .then(() => {
-                        setRender(!render);
+            .then((result) => {
+                if(result.isConfirmed) {
+                    fetch(`http://localhost:5000/users/${user._id}`, {
+                        method: 'DELETE'
                     })
-                    .catch(err => console.log(err));
+                        .then(res => res.json())
+                        .then(() => {
+                            toast.success('Delete Successfully!');
+                            setRender(!render);
+                        })
+                        .catch(err => console.log(err));
+                } else {
+                    toast.success('Delete Cancelled!');
+                }
+
             });
     };
 

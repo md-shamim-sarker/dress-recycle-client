@@ -14,7 +14,6 @@ const Register = () => {
 
     const {register, handleSubmit, reset} = useForm();
     const onSubmit = data => {
-
         const user = {
             fullName: data.fullName,
             email: data.email,
