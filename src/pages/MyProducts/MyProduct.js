@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 
-const MyProduct = ({myProduct, sl, advertiseHandler, unAdvertiseHandler}) => {
+const MyProduct = ({myProduct, sl, advertiseHandler, unAdvertiseHandler, handleDelete}) => {
 
     return (
         <tr>
@@ -35,7 +35,7 @@ const MyProduct = ({myProduct, sl, advertiseHandler, unAdvertiseHandler}) => {
                 <Link to={`/dashboard/update/${myProduct._id}`} className="btn btn-primary btn-sm">Update</Link>
             </td>
             <td>
-                <div className="btn btn-warning btn-sm">Delete</div>
+                <div onClick={() => handleDelete(myProduct)} className="btn btn-warning btn-sm">Delete</div>
             </td>
         </tr>
     );

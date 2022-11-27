@@ -12,6 +12,7 @@ import {
     deleteUser
 } from "firebase/auth";
 import app from '../firebase/Firebase.config';
+import Swal from 'sweetalert2';
 
 export const AuthContext = createContext();
 const auth = getAuth(app);
@@ -81,6 +82,7 @@ const UserContext = ({children}) => {
         };
     }, []);
 
+    // Data add to db
     const dataAddToDb = (data, url) => {
         return fetch(url, {
             method: 'POST',
@@ -88,6 +90,32 @@ const UserContext = ({children}) => {
                 'content-type': 'application/json'
             },
             body: JSON.stringify(data)
+        });
+    };
+
+    // Delete Confirmation
+    const deleteConfirmation = () => {
+        return Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        });
+    };
+
+    // Report Confirmation
+    const reportConfirmation = () => {
+        return Swal.fire({
+            title: 'Are you sure?',
+            text: "You are going to report to admin about this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, Report!'
         });
     };
 
@@ -105,7 +133,9 @@ const UserContext = ({children}) => {
         setOpen,
         render,
         setRender,
-        dataAddToDb
+        dataAddToDb,
+        deleteConfirmation,
+        reportConfirmation
     };
     return (
         <AuthContext.Provider value={authInfo}>

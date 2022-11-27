@@ -1,9 +1,9 @@
 import React, {useContext} from 'react';
+import toast from 'react-hot-toast';
 import {AuthContext} from '../../contexts/UserContext';
 
 const OrderModal = ({product, setProduct}) => {
     const {user, dataAddToDb} = useContext(AuthContext);
-    // console.log('TEST', product);
     const onSubmitHandler = event => {
         event.preventDefault();
         const form = event.target;
@@ -25,7 +25,7 @@ const OrderModal = ({product, setProduct}) => {
 
         dataAddToDb(orders, 'http://localhost:5000/orders')
             .then(() => {
-                alert("Successfull!!!");
+                toast.success('Successfully Ordered!');
                 setProduct(null);
             })
             .catch(err => console.log(err));

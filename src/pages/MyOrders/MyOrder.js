@@ -1,7 +1,7 @@
 import React from 'react';
 
 const MyOrder = ({sl, product, handleDelete}) => {
-    // console.log('Shamim', product);
+
     return (
         <tr>
             <th>

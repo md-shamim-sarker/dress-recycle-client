@@ -1,7 +1,6 @@
 import React from 'react';
 
 const MyWishList = ({myWishList: product, sl, modalHandler, handleDelete}) => {
-    console.log('###', product);
     return (
         <tr>
             <th>

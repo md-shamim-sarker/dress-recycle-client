@@ -1,23 +1,17 @@
 import React, {useContext, useEffect, useState} from 'react';
 import {AuthContext} from '../../../contexts/UserContext';
 import Seller from './Seller';
+import toast from 'react-hot-toast';
 
 const Sellers = () => {
     const [sellers, setSellers] = useState([]);
-    const {render, setRender} = useContext(AuthContext);
+    const {render, setRender, deleteConfirmation} = useContext(AuthContext);
 
     const makeAdminHandler = user => {
         fetch(`http://localhost:5000/users/makeAdmin/${user._id}`, {
             method: 'PUT',
         }).then(() => {
-            setRender(!render);
-        }).catch(err => console.log(err));
-    };
-
-    const cancelAdminHandler = user => {
-        fetch(`http://localhost:5000/users/cancelAdmin/${user._id}`, {
-            method: 'PUT',
-        }).then(() => {
+            toast.success('Successfully Made Admin!');
             setRender(!render);
         }).catch(err => console.log(err));
     };
@@ -26,6 +20,7 @@ const Sellers = () => {
         fetch(`http://localhost:5000/users/seller/${user._id}`, {
             method: 'PUT',
         }).then(() => {
+            toast.success('Successfully Seller Verified!');
             setRender(!render);
         }).catch(err => console.log(err));
     };
@@ -34,22 +29,23 @@ const Sellers = () => {
         fetch(`http://localhost:5000/users/seller2/${user._id}`, {
             method: 'PUT',
         }).then(() => {
+            toast.success('Successfully Seller Unverified!');
             setRender(!render);
         }).catch(err => console.log(err));
     };
 
     const handleDelete = user => {
-        const confirmation = window.confirm('You are going to delete a user!!!');
-        confirmation &&
-            fetch(`http://localhost:5000/users/${user._id}`, {
-                method: 'DELETE'
-            })
-                .then(res => res.json())
-                .then(() => {
-                    setRender(!render);
-                    alert("Delete Successfully!!!");
+        deleteConfirmation()
+            .then(() => {
+                fetch(`http://localhost:5000/users/${user._id}`, {
+                    method: 'DELETE'
                 })
-                .catch(err => console.log(err));
+                    .then(res => res.json())
+                    .then(() => {
+                        setRender(!render);
+                    })
+                    .catch(err => console.log(err));
+            });
     };
 
     useEffect(() => {
@@ -84,7 +80,6 @@ const Sellers = () => {
                                 seller={seller}
                                 sl={sl + 1}
                                 makeAdminHandler={makeAdminHandler}
-                                cancelAdminHandler={cancelAdminHandler}
                                 verifyHandler={verifyHandler}
                                 unVerifyHandler={unVerifyHandler}
                                 handleDelete={handleDelete}

@@ -3,7 +3,6 @@ import {GiEternalLove} from 'react-icons/gi';
 import {MdOutlineReportProblem} from 'react-icons/md';
 
 const Product = ({product, modalHandler, wishListHandler, reportHandler}) => {
-    // console.log('Sneha', product);
     return (
         <div className="card card-compact bg-base-100 shadow-xl">
             <figure><img src={product.image} alt="cloth" className='w-full' /></figure>

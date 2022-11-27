@@ -1,4 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react';
+import toast from 'react-hot-toast';
 import {AuthContext} from '../../contexts/UserContext';
 import OrderModal from '../OrderModal/OrderModal';
 import MyWishList from './MyWishList';
@@ -23,8 +24,8 @@ const MyWishLists = () => {
         })
             .then(res => res.json())
             .then(() => {
+                toast.success('Successfully Cancelled!');
                 setRender(!render);
-                alert("Delete Successfully!!!");
             })
             .catch(err => console.log(err));
     };

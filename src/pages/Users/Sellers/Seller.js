@@ -10,7 +10,6 @@ const Seller = ({
     unVerifyHandler,
     handleDelete
 }) => {
-    // console.log("SELLER", seller);
     return (
         <tr>
             <th>
@@ -51,12 +50,7 @@ const Seller = ({
                 }
             </td>
             <td>
-                {
-                    seller?.isAdmin
-                        ? <button onClick={() => cancelAdminHandler(seller)} className="btn btn-primary btn-sm">Cancel Admin</button>
-                        : <button onClick={() => makeAdminHandler(seller)} className="btn btn-primary btn-sm">Make Admin</button>
-                }
-
+                <button onClick={() => makeAdminHandler(seller)} className="btn btn-primary btn-sm">Make Admin</button>
             </td>
             <td>
                 <button onClick={() => handleDelete(seller)} className="btn btn-warning btn-sm">Delete</button>

@@ -1,7 +1,6 @@
 import React from 'react';
 
-const ReportedItem = ({reportedItem, sl, unReportHandler}) => {
-    // console.log(reportedItem);
+const ReportedItem = ({reportedItem, sl, unReportHandler, handleDelete}) => {
     return (
         <tr>
             <th>
@@ -26,7 +25,7 @@ const ReportedItem = ({reportedItem, sl, unReportHandler}) => {
                 <button onClick={() => unReportHandler(reportedItem)} className="btn btn-primary btn-sm">Cancel</button>
             </td>
             <td>
-                <div className="btn btn-primary btn-sm">Delete</div>
+                <div onClick={() => handleDelete(reportedItem)} className="btn btn-primary btn-sm">Delete</div>
             </td>
         </tr>
     );

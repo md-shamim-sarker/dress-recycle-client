@@ -1,4 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react';
+import toast from 'react-hot-toast';
 import {AuthContext} from '../../contexts/UserContext';
 import MyOrder from './MyOrder';
 
@@ -12,8 +13,8 @@ const MyOrders = () => {
         })
             .then(res => res.json())
             .then(() => {
+                toast.success('Successfully Cancelled!');
                 setRender(!render);
-                alert("Delete Successfully!!!");
             })
             .catch(err => console.log(err));
     };

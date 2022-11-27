@@ -1,19 +1,13 @@
 import React, {useContext, useEffect, useState} from 'react';
+import toast from 'react-hot-toast';
 import {AuthContext} from '../../../contexts/UserContext';
 import OrderModal from '../../OrderModal/OrderModal';
 import AdCard from './AdCard';
 
 const Advertise = () => {
-    const {user} = useContext(AuthContext);
+    const {user, reportConfirmation} = useContext(AuthContext);
     const [products, setProducts] = useState([]);
     const [product, setProduct] = useState(null);
-
-    useEffect(() => {
-        fetch('http://localhost:5000/products/all/advertise')
-            .then(res => res.json())
-            .then(data => setProducts(data))
-            .catch(err => console.log(err));
-    }, []);
 
     const wishListHandler = (product) => {
         const wishList = {
@@ -34,18 +28,25 @@ const Advertise = () => {
             headers: {'content-type': 'application/json'},
             body: JSON.stringify(wishList)
         }).then(() => {
-            alert("Add to wishlist successfull!!");
+            toast.success('Successfully Add to Wishlist!');
         }).catch(error => {
             console.error(error.message);
         });
     };
 
     const reportHandler = (product) => {
-        fetch(`http://localhost:5000/products/report/${product._id}`, {
-            method: 'PUT',
-        }).then(() => {
-            alert(`Report to Admin Success!!!`);
-        }).catch(err => console.log(err));
+        reportConfirmation()
+            .then((result) => {
+                if(result.isConfirmed) {
+                    fetch(`http://localhost:5000/products/report/${product._id}`, {
+                        method: 'PUT',
+                    }).then(() => {
+                        toast.success('Successfully Reported!');
+                    }).catch(err => console.log(err));
+                } else {
+                    toast.success('Thank you for change your decision!');
+                }
+            });
     };
 
     const modalHandler = (product) => {
@@ -61,6 +62,13 @@ const Advertise = () => {
         };
         setProduct(orderData);
     };
+
+    useEffect(() => {
+        fetch('http://localhost:5000/products/all/advertise')
+            .then(res => res.json())
+            .then(data => setProducts(data))
+            .catch(err => console.log(err));
+    }, []);
 
     return (
         <>

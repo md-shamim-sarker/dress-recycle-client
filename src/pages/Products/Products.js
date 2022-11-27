@@ -1,4 +1,5 @@
 import React, {useContext, useState} from 'react';
+import toast from 'react-hot-toast';
 import {useLoaderData} from 'react-router-dom';
 import {AuthContext} from '../../contexts/UserContext';
 import OrderModal from '../OrderModal/OrderModal';
@@ -6,17 +7,24 @@ import Product from './Product';
 import ProductBanner from './ProductBanner';
 
 const Products = () => {
-    const {user} = useContext(AuthContext);
+    const {user, reportConfirmation} = useContext(AuthContext);
     const products = useLoaderData();
     const [product, setProduct] = useState(null);
     const categoryImage = products[0].categoryImage;
 
     const reportHandler = (product) => {
-        fetch(`http://localhost:5000/products/report/${product._id}`, {
-            method: 'PUT',
-        }).then(() => {
-            alert(`Report to Admin Success!!!`);
-        }).catch(err => console.log(err));
+        reportConfirmation()
+            .then((result) => {
+                if(result.isConfirmed) {
+                    fetch(`http://localhost:5000/products/report/${product._id}`, {
+                        method: 'PUT',
+                    }).then(() => {
+                        toast.success('Successfully Reported!');
+                    }).catch(err => console.log(err));
+                } else {
+                    toast.success('Thank you for change your decision!');
+                }
+            });
     };
 
     const wishListHandler = (product) => {
@@ -37,7 +45,7 @@ const Products = () => {
             headers: {'content-type': 'application/json'},
             body: JSON.stringify(wishList)
         }).then(() => {
-            alert("Add to wishlist successfull!!");
+            toast.success('Successfully Add to Wishlist!');
         }).catch(error => {
             console.error(error.message);
         });

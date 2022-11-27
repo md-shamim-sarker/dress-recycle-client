@@ -1,10 +1,34 @@
 import React, {useContext, useEffect, useState} from 'react';
+import toast from 'react-hot-toast';
 import {AuthContext} from '../../contexts/UserContext';
 import ReportedItem from './ReportedItem';
 
 const ReportedItems = () => {
     const [reportedItems, setReportedItems] = useState([]);
-    const {render, setRender} = useContext(AuthContext);
+    const {render, setRender, deleteConfirmation} = useContext(AuthContext);
+
+    const unReportHandler = (product) => {
+        fetch(`http://localhost:5000/products/unreport/${product._id}`, {
+            method: 'PUT',
+        }).then(() => {
+            toast.success('Successfully Report Cancelled!');
+            setRender(!render);
+        }).catch(err => console.log(err));
+    };
+
+    const handleDelete = user => {
+        deleteConfirmation()
+            .then(() => {
+                fetch(`http://localhost:5000/products/report/${user._id}`, {
+                    method: 'DELETE'
+                })
+                    .then(res => res.json())
+                    .then(() => {
+                        setRender(!render);
+                    })
+                    .catch(err => console.log(err));
+            });
+    };
 
     useEffect(() => {
         fetch('http://localhost:5000/products/report/true')
@@ -13,14 +37,7 @@ const ReportedItems = () => {
             .catch(err => console.log(err));
     }, [render]);
 
-    const unReportHandler = (product) => {
-        fetch(`http://localhost:5000/products/unreport/${product._id}`, {
-            method: 'PUT',
-        }).then(() => {
-            setRender(!render);
-            alert(`Unreport to Admin Success for!!!`);
-        }).catch(err => console.log(err));
-    };
+
 
     return (
         <div>
@@ -46,6 +63,7 @@ const ReportedItems = () => {
                                 reportedItem={reportedItem}
                                 sl={sl + 1}
                                 unReportHandler={unReportHandler}
+                                handleDelete={handleDelete}
                             ></ReportedItem>)
                         }
                     </tbody>

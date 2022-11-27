@@ -1,29 +1,7 @@
-import React, {useContext} from 'react';
-import {AuthContext} from '../../../contexts/UserContext';
+import React from 'react';
 
-const Buyer = ({buyer, sl}) => {
-    const {render, setRender} = useContext(AuthContext);
+const Buyer = ({buyer, sl, makeAdminHandler, handleDelete}) => {
 
-    const makeAdminHandler = user => {
-        fetch(`http://localhost:5000/users/makeAdmin/${user._id}`, {
-            method: 'PUT',
-        }).then(() => {
-            setRender(!render);
-            alert("Make Admin Successfull!!!");
-        }).catch(err => console.log(err));
-    };
-
-    const handleDelete = user => {
-        fetch(`http://localhost:5000/users/${user._id}`, {
-            method: 'DELETE'
-        })
-            .then(res => res.json())
-            .then(() => {
-                setRender(!render);
-                alert("Delete Successfully!!!");
-            })
-            .catch(err => console.log(err));
-    };
     return (
         <tr>
             <th>
@@ -40,7 +18,6 @@ const Buyer = ({buyer, sl}) => {
                                     ? <img src={buyer?.image} alt="Avatar Tailwind CSS Component" />
                                     : <img src='https://simg.nicepng.com/png/small/301-3012856_account-user-profile-avatar-comments-free-image-user.png' alt="Avatar Tailwind CSS Component" />
                             }
-
                         </div>
                     </div>
                 </div>

@@ -1,9 +1,10 @@
 import React, {useContext, useEffect, useState} from 'react';
+import toast from 'react-hot-toast';
 import {AuthContext} from '../../contexts/UserContext';
 import MyProduct from './MyProduct';
 
 const MyProducts = () => {
-    const {user, render, setRender} = useContext(AuthContext);
+    const {user, render, setRender, deleteConfirmation} = useContext(AuthContext);
     const [myProducts, setMyProducts] = useState([]);
 
     const advertiseHandler = product => {
@@ -11,8 +12,8 @@ const MyProducts = () => {
         fetch(`http://localhost:5000/products/advertise2/${product._id}`, {
             method: 'PUT',
         }).then(() => {
+            toast.success('Successfully Add to Advertise!');
             setRender(!render);
-            alert("Advertise Successfull!!!");
         }).catch(err => console.log(err));
     };
 
@@ -21,9 +22,23 @@ const MyProducts = () => {
         fetch(`http://localhost:5000/products/unAdvertise2/${product._id}`, {
             method: 'PUT',
         }).then(() => {
+            toast.success('Successfully Remove from Advertise!');
             setRender(!render);
-            alert("Unadvertise Successfull!!!");
         }).catch(err => console.log(err));
+    };
+
+    const handleDelete = product => {
+        deleteConfirmation()
+            .then(() => {
+                fetch(`http://localhost:5000/products/${product._id}`, {
+                    method: 'DELETE'
+                })
+                    .then(res => res.json())
+                    .then(() => {
+                        setRender(!render);
+                    })
+                    .catch(err => console.log(err));
+            });
     };
 
     useEffect(() => {
@@ -58,6 +73,7 @@ const MyProducts = () => {
                                 sl={sl + 1}
                                 advertiseHandler={advertiseHandler}
                                 unAdvertiseHandler={unAdvertiseHandler}
+                                handleDelete={handleDelete}
                             ></MyProduct>)
                         }
                     </tbody>

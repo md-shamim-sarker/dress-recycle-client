@@ -1,29 +1,6 @@
-import React, {useContext} from 'react';
-import {AuthContext} from '../../../contexts/UserContext';
+import React from 'react';
 
-const Admin = ({admin, sl}) => {
-    const {render, setRender} = useContext(AuthContext);
-
-    const cancelAdminHandler = user => {
-        fetch(`http://localhost:5000/users/cancelAdmin/${user._id}`, {
-            method: 'PUT',
-        }).then(() => {
-            setRender(!render);
-            alert("Cancel Admin Successfull!!!");
-        }).catch(err => console.log(err));
-    };
-
-    const handleDelete = user => {
-        fetch(`http://localhost:5000/users/${user._id}`, {
-            method: 'DELETE'
-        })
-            .then(res => res.json())
-            .then(() => {
-                setRender(!render);
-                alert("Delete Successfully!!!");
-            })
-            .catch(err => console.log(err));
-    };
+const Admin = ({admin, sl, handleDelete, cancelAdminHandler}) => {
 
     return (
         <tr>

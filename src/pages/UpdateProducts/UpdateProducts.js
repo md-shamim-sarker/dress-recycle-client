@@ -1,5 +1,6 @@
 import React from 'react';
 import {useForm} from 'react-hook-form';
+import toast from 'react-hot-toast';
 import {useLoaderData, useNavigate} from 'react-router-dom';
 
 const UpdateProducts = () => {
@@ -20,13 +21,12 @@ const UpdateProducts = () => {
             yearsOfUse: data.yearsOfUse,
             date: Date().slice(4, 24)
         };
-
         fetch(`http://localhost:5000/products/update/${product._id}`, {
             method: 'PUT',
             headers: {'content-type': 'application/json'},
             body: JSON.stringify(products)
         }).then(() => {
-            alert("success!!!");
+            toast.success('Successfully Updated!');
             navigate("/dashboard/myProducts");
         }).catch(err => console.log(err));
     };

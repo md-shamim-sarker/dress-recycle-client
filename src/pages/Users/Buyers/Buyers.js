@@ -1,10 +1,34 @@
 import React, {useContext, useEffect, useState} from 'react';
+import toast from 'react-hot-toast';
 import {AuthContext} from '../../../contexts/UserContext';
 import Buyer from './Buyer';
 
 const Buyers = () => {
     const [buyers, setBuyers] = useState([]);
-    const {render} = useContext(AuthContext);
+    const {render, setRender, deleteConfirmation} = useContext(AuthContext);
+
+    const makeAdminHandler = user => {
+        fetch(`http://localhost:5000/users/makeAdmin/${user._id}`, {
+            method: 'PUT',
+        }).then(() => {
+            setRender(!render);
+            toast.success('Successfully Made Admin!');
+        }).catch(err => console.log(err));
+    };
+
+    const handleDelete = user => {
+        deleteConfirmation()
+            .then(() => {
+                fetch(`http://localhost:5000/users/${user._id}`, {
+                    method: 'DELETE'
+                })
+                    .then(res => res.json())
+                    .then(() => {
+                        setRender(!render);
+                    })
+                    .catch(err => console.log(err));
+            });
+    };
 
     useEffect(() => {
         fetch('http://localhost:5000/users/role2/buyer')
@@ -36,6 +60,8 @@ const Buyers = () => {
                                 key={buyer?._id}
                                 buyer={buyer}
                                 sl={sl + 1}
+                                makeAdminHandler={makeAdminHandler}
+                                handleDelete={handleDelete}
                             ></Buyer>)
                         }
                     </tbody>
