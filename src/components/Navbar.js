@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {Link, NavLink} from 'react-router-dom';
 import {RiMenu2Fill} from 'react-icons/ri';
 import {AiOutlineClose} from 'react-icons/ai';
@@ -7,6 +7,14 @@ import {AuthContext} from '../contexts/UserContext';
 
 const Navbar = () => {
     const {user, logOut, open, setOpen} = useContext(AuthContext);
+    const [userInfo, setUserInfo] = useState({});
+
+    useEffect(() => {
+        fetch(`http://localhost:5000/users/${user?.email}`)
+            .then(res => res.json())
+            .then(data => setUserInfo(data))
+            .catch(err => console.log(err));
+    }, [user?.email]);
 
     const logOutHandler = () => {
         logOut()
@@ -46,6 +54,11 @@ const Navbar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
+                <p className='text-lg font-bold mr-2'>
+                    {
+                        userInfo?.role?.toUpperCase()
+                    }
+                </p>
                 {
                     user?.uid
                         ? <img src={user.photoURL} alt="..." className='w-8 h-8 rounded-full mr-2' title={user.displayName} />

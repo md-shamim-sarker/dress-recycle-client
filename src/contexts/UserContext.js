@@ -142,6 +142,15 @@ const UserContext = ({children}) => {
         });
     };
 
+    const buyerConfirmation = () => {
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Sorry, you are not buyer!',
+            footer: '<Link>Please, login with your buyer account.<Link>'
+        });
+    };
+
     const authInfo = {
         user,
         signInWithGoogle,
@@ -159,7 +168,8 @@ const UserContext = ({children}) => {
         dataAddToDb,
         isUserExist,
         deleteConfirmation,
-        reportConfirmation
+        reportConfirmation,
+        buyerConfirmation
     };
     return (
         <AuthContext.Provider value={authInfo}>

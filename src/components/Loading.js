@@ -2,13 +2,8 @@ import React from 'react';
 
 const Loading = () => {
     return (
-        <div className="rounded animate-pulse">
-            <div className="space-y-4">
-                <div className="w-full h-16 rounded-2xl dark:bg-gray-400"></div>
-                <div className="w-full h-16 rounded-2xl dark:bg-gray-400"></div>
-                <div className="w-full h-16 rounded-2xl dark:bg-gray-400"></div>
-                <div className="w-full h-16 rounded-2xl dark:bg-gray-400"></div>
-            </div>
+        <div className='w-20 mx-auto'>
+            <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin dark:border-violet-400"></div>
         </div>
     );
 };

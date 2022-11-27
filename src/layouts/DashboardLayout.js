@@ -15,8 +15,6 @@ const DashboardLayout = () => {
             .catch(err => console.log(err));
     }, [user?.email]);
 
-    console.log(userInfo);
-
     return (
         <div>
             <Navbar></Navbar>
