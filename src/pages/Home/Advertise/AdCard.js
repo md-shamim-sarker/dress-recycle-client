@@ -6,6 +6,7 @@ import {AuthContext} from '../../../contexts/UserContext';
 
 const AdCard = ({adItem: product, modalHandler, wishListHandler, reportHandler}) => {
     const [userInfo, setUserInfo] = useState({});
+    const [sellerInfo, setSellerInfo] = useState({});
     const {user, render, buyerConfirmation} = useContext(AuthContext);
 
     useEffect(() => {
@@ -16,6 +17,15 @@ const AdCard = ({adItem: product, modalHandler, wishListHandler, reportHandler})
             .then(data => setUserInfo(data))
             .catch(err => console.log(err));
     }, [user?.email, render]);
+
+    useEffect(() => {
+        fetch(`http://localhost:5000/users/${product?.sellerEmail}`, {
+            headers: {authorization: localStorage.getItem('token')}
+        })
+            .then(res => res.json())
+            .then(data => setSellerInfo(data))
+            .catch(err => console.log(err));
+    }, [product?.sellerEmail]);
 
     return (
         <div className="card card-compact bg-base-100 shadow-xl">
@@ -45,7 +55,7 @@ const AdCard = ({adItem: product, modalHandler, wishListHandler, reportHandler})
                         <span><strong>Seller Name:</strong> {product.sellerName}</span>
                         <span>
                             {
-                                userInfo?.isVerified
+                                sellerInfo?.isVerified
                                 && <GoVerified className='text-blue-500' title='Verified'></GoVerified>
                             }
                         </span>
