@@ -8,7 +8,7 @@ const Buyers = () => {
     const {render, setRender, deleteConfirmation} = useContext(AuthContext);
 
     const makeAdminHandler = user => {
-        fetch(`http://localhost:5000/users/makeAdmin/${user._id}`, {
+        fetch(`https://dress-recycle-server.vercel.app/users/makeAdmin/${user._id}`, {
             method: 'PUT',
         }).then(() => {
             setRender(!render);
@@ -20,7 +20,7 @@ const Buyers = () => {
         deleteConfirmation()
             .then((result) => {
                 if(result.isConfirmed) {
-                    fetch(`http://localhost:5000/users/${user._id}`, {
+                    fetch(`https://dress-recycle-server.vercel.app/users/${user._id}`, {
                         method: 'DELETE'
                     })
                         .then(res => res.json())
@@ -37,7 +37,7 @@ const Buyers = () => {
     };
 
     useEffect(() => {
-        fetch('http://localhost:5000/users/role2/buyer', {
+        fetch('https://dress-recycle-server.vercel.app/users/role2/buyer', {
             headers: {
                 authorization: localStorage.getItem('token')
             }

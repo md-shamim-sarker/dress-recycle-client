@@ -7,7 +7,7 @@ const Dashboard = () => {
     const [userInfo, setUserInfo] = useState({});
 
     useEffect(() => {
-        fetch(`http://localhost:5000/users/${user?.email}`, {
+        fetch(`https://dress-recycle-server.vercel.app/users/${user?.email}`, {
             headers: {authorization: localStorage.getItem('token')}
         })
             .then(res => res.json())

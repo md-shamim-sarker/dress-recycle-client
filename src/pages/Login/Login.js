@@ -21,7 +21,7 @@ const Login = () => {
 
     // Token handler
     /*  const tokenHandler = (email) => {
-         return fetch('http://localhost:5000/jwt', {
+         return fetch('https://dress-recycle-server.vercel.app/jwt', {
              method: 'POST',
              headers: {
                  'content-type': 'application/json'
@@ -61,7 +61,7 @@ const Login = () => {
                     .then(res => res.json())
                     .then(data => {
                         if(data.length === 0) {
-                            dataAddToDb(user, 'http://localhost:5000/users')
+                            dataAddToDb(user, 'https://dress-recycle-server.vercel.app/users')
                                 .then((result) => {
                                     if(result.ok) {
                                         toast.success('This user is saved to database!');
@@ -105,7 +105,7 @@ const Login = () => {
                     .then(res => res.json())
                     .then(data => {
                         if(data.length === 0) {
-                            dataAddToDb(user, 'http://localhost:5000/users')
+                            dataAddToDb(user, 'https://dress-recycle-server.vercel.app/users')
                                 .then((result) => {
                                     if(result.ok) {
                                         toast.success('This user is saved to database!');

@@ -10,7 +10,7 @@ const Product = ({product, modalHandler, wishListHandler, reportHandler}) => {
     const [sellerInfo, setSellerInfo] = useState({});
 
     useEffect(() => {
-        fetch(`http://localhost:5000/users/${user?.email}`, {
+        fetch(`https://dress-recycle-server.vercel.app/users/${user?.email}`, {
             headers: {authorization: localStorage.getItem('token')}
         })
             .then(res => res.json())
@@ -19,7 +19,7 @@ const Product = ({product, modalHandler, wishListHandler, reportHandler}) => {
     }, [user?.email]);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/users/${product?.sellerEmail}`, {
+        fetch(`https://dress-recycle-server.vercel.app/users/${product?.sellerEmail}`, {
             headers: {authorization: localStorage.getItem('token')}
         })
             .then(res => res.json())

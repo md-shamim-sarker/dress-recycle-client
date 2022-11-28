@@ -8,7 +8,7 @@ const MyOrders = () => {
     const [products, setProducts] = useState([]);
 
     const handleDelete = order => {
-        fetch(`http://localhost:5000/orders/${order._id}`, {
+        fetch(`https://dress-recycle-server.vercel.app/orders/${order._id}`, {
             method: 'DELETE'
         })
             .then(res => res.json())
@@ -20,7 +20,7 @@ const MyOrders = () => {
     };
 
     useEffect(() => {
-        fetch(`http://localhost:5000/orders/${user?.email}`, {
+        fetch(`https://dress-recycle-server.vercel.app/orders/${user?.email}`, {
             headers: {
                 authorization: localStorage.getItem('token')
             }

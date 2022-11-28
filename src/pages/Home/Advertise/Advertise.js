@@ -23,7 +23,7 @@ const Advertise = () => {
             wishDate: Date().slice(4, 24)
         };
         console.log(wishList);
-        fetch('http://localhost:5000/wishLists', {
+        fetch('https://dress-recycle-server.vercel.app/wishLists', {
             method: 'POST',
             headers: {'content-type': 'application/json'},
             body: JSON.stringify(wishList)
@@ -38,7 +38,7 @@ const Advertise = () => {
         reportConfirmation()
             .then((result) => {
                 if(result.isConfirmed) {
-                    fetch(`http://localhost:5000/products/report/${product._id}`, {
+                    fetch(`https://dress-recycle-server.vercel.app/products/report/${product._id}`, {
                         method: 'PUT',
                     }).then(() => {
                         toast.success('Successfully Reported!');
@@ -64,7 +64,7 @@ const Advertise = () => {
     };
 
     useEffect(() => {
-        fetch('http://localhost:5000/products/all/advertise')
+        fetch('https://dress-recycle-server.vercel.app/products/all/advertise')
             .then(res => res.json())
             .then(data => setProducts(data))
             .catch(err => console.log(err));

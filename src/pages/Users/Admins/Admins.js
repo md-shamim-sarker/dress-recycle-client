@@ -8,7 +8,7 @@ const Admins = () => {
     const {render, setRender, deleteConfirmation} = useContext(AuthContext);
 
     const cancelAdminHandler = user => {
-        fetch(`http://localhost:5000/users/cancelAdmin/${user._id}`, {
+        fetch(`https://dress-recycle-server.vercel.app/users/cancelAdmin/${user._id}`, {
             method: 'PUT',
         }).then(() => {
             toast.success('Successfully Canceled Admin!');
@@ -20,7 +20,7 @@ const Admins = () => {
         deleteConfirmation()
             .then((result) => {
                 if(result.isConfirmed) {
-                    fetch(`http://localhost:5000/users/${user._id}`, {
+                    fetch(`https://dress-recycle-server.vercel.app/users/${user._id}`, {
                         method: 'DELETE'
                     })
                         .then(res => res.json())
@@ -37,7 +37,7 @@ const Admins = () => {
     };
 
     useEffect(() => {
-        fetch('http://localhost:5000/users/role2/admin', {
+        fetch('https://dress-recycle-server.vercel.app/users/role2/admin', {
             headers: {
                 authorization: localStorage.getItem('token')
             }

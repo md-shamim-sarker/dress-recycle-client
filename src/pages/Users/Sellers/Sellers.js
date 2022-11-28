@@ -8,7 +8,7 @@ const Sellers = () => {
     const {render, setRender, deleteConfirmation} = useContext(AuthContext);
 
     const makeAdminHandler = user => {
-        fetch(`http://localhost:5000/users/makeAdmin/${user._id}`, {
+        fetch(`https://dress-recycle-server.vercel.app/users/makeAdmin/${user._id}`, {
             method: 'PUT',
         }).then(() => {
             toast.success('Successfully Made Admin!');
@@ -17,7 +17,7 @@ const Sellers = () => {
     };
 
     const verifyHandler = user => {
-        fetch(`http://localhost:5000/users/seller/${user._id}`, {
+        fetch(`https://dress-recycle-server.vercel.app/users/seller/${user._id}`, {
             method: 'PUT',
         }).then(() => {
             toast.success('Successfully Seller Verified!');
@@ -26,7 +26,7 @@ const Sellers = () => {
     };
 
     const unVerifyHandler = user => {
-        fetch(`http://localhost:5000/users/seller2/${user._id}`, {
+        fetch(`https://dress-recycle-server.vercel.app/users/seller2/${user._id}`, {
             method: 'PUT',
         }).then(() => {
             toast.success('Successfully Seller Unverified!');
@@ -38,7 +38,7 @@ const Sellers = () => {
         deleteConfirmation()
             .then((result) => {
                 if(result.isConfirmed) {
-                    fetch(`http://localhost:5000/users/${user._id}`, {
+                    fetch(`https://dress-recycle-server.vercel.app/users/${user._id}`, {
                         method: 'DELETE'
                     })
                         .then(res => res.json())
@@ -55,7 +55,7 @@ const Sellers = () => {
     };
 
     useEffect(() => {
-        fetch('http://localhost:5000/users/role2/seller', {
+        fetch('https://dress-recycle-server.vercel.app/users/role2/seller', {
             headers: {
                 authorization: localStorage.getItem('token')
             }
