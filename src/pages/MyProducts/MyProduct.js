@@ -1,8 +1,8 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 
-const MyProduct = ({myProduct, sl, advertiseHandler, unAdvertiseHandler, handleDelete}) => {
-
+const MyProduct = ({myProduct, sl, advertiseHandler, unAdvertiseHandler, handleDelete, unSoldOutHandler}) => {
+    console.log(myProduct);
     return (
         <tr>
             <th>
@@ -19,16 +19,30 @@ const MyProduct = ({myProduct, sl, advertiseHandler, unAdvertiseHandler, handleD
                     </div>
                 </div>
             </td>
-            <td>{myProduct?.productName}</td>
+            <td>
+                {myProduct?.productName}
+                {
+                    myProduct?.soldOut && <div className="badge badge-warning gap-2 ml-1">
+                        Sold Out
+                    </div>
+                }
+            </td>
             <td>{myProduct?.resalePrice} Taka</td>
             <td>
-                <div className="btn btn-primary btn-sm">Available</div>
+                {
+                    myProduct?.soldOut
+                        ? <button onClick={() => unSoldOutHandler(myProduct)} className="btn btn-primary btn-sm">Make Available</button>
+                        : <button className="btn btn-primary btn-sm">Available</button>
+                }
+
             </td>
             <td>
                 {
-                    myProduct?.advertise
+                    myProduct?.advertise && !myProduct?.soldOut
                         ? <button onClick={() => unAdvertiseHandler(myProduct)} className="btn btn-primary btn-sm">Undvertise</button>
-                        : <button onClick={() => advertiseHandler(myProduct)} className="btn btn-primary btn-sm">Advertise</button>
+                        : myProduct?.soldOut
+                            ? <button disabled className="btn btn-primary btn-sm">Advertise</button>
+                            : <button onClick={() => advertiseHandler(myProduct)} className="btn btn-primary btn-sm">Advertise</button>
                 }
             </td>
             <td>

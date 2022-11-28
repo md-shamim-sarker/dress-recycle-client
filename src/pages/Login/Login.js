@@ -19,6 +19,16 @@ const Login = () => {
     const location = useLocation();
     const from = location.state?.from?.pathname || "/";
 
+    // Token handler
+    /*  const tokenHandler = (email) => {
+         return fetch('http://localhost:5000/jwt', {
+             method: 'POST',
+             headers: {
+                 'content-type': 'application/json'
+             },
+             body: JSON.stringify(email)
+         });
+     }; */
 
     const signInWithGoogleHandler = () => {
         signInWithGoogle()
@@ -34,6 +44,18 @@ const Login = () => {
                     isAdmin: false
                 };
 
+                const currentUser = {
+                    email: user.email
+                };
+                console.log(currentUser);
+                // Set jwt token
+                /* tokenHandler(currentUser)
+                    .then(res => res.json())
+                    .then(data => {
+                        localStorage.setItem('token', data.token);
+                        navigate(from, {replace: true});
+                    }); */
+                navigate(from, {replace: true});
                 // Add to database
                 isUserExist(user.email)
                     .then(res => res.json())
@@ -47,7 +69,6 @@ const Login = () => {
                                 }).catch(console.dir);
                         }
                     });
-                navigate(from, {replace: true});
             }).catch(err => {
                 console.log(err);
             });
@@ -67,6 +88,18 @@ const Login = () => {
                     isAdmin: false
                 };
 
+                const currentUser = {
+                    email: user.email
+                };
+                console.log(currentUser);
+                // Set jwt token
+                /*  tokenHandler(currentUser)
+                     .then(res => res.json())
+                     .then(data => {
+                         localStorage.setItem('token', data.token);
+                         navigate(from, {replace: true});
+                     }); */
+                navigate(from, {replace: true});
                 // Add to database
                 isUserExist(user.email)
                     .then(res => res.json())
@@ -80,7 +113,6 @@ const Login = () => {
                                 }).catch(console.dir);
                         }
                     });
-                navigate(from, {replace: true});
             }).catch(err => {
                 console.log(err);
             });
@@ -89,9 +121,19 @@ const Login = () => {
     const onSubmit = data => {
         signInWithEmailPassword(data.email, data.password)
             .then(result => {
-                const user = result.user.displayName;
-                const email = result.user.email;
-                console.log({user, email});
+                const user = result.user;
+
+                const currentUser = {
+                    email: user.email
+                };
+                console.log(currentUser);
+                // Set jwt token
+                /* tokenHandler(currentUser)
+                    .then(res => res.json())
+                    .then(data => {
+                        localStorage.setItem('token', data.token);
+                        navigate(from, {replace: true});
+                    }); */
                 navigate(from, {replace: true});
             }).catch(err => console.log(err));
     };

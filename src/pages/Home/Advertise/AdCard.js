@@ -6,14 +6,16 @@ import {AuthContext} from '../../../contexts/UserContext';
 
 const AdCard = ({adItem: product, modalHandler, wishListHandler, reportHandler}) => {
     const [userInfo, setUserInfo] = useState({});
-    const {render, buyerConfirmation} = useContext(AuthContext);
+    const {user, render, buyerConfirmation} = useContext(AuthContext);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/users/${product?.sellerEmail}`)
-            .then((res) => res.json())
+        fetch(`http://localhost:5000/users/${user?.email}`, {
+            headers: {authorization: localStorage.getItem('token')}
+        })
+            .then(res => res.json())
             .then(data => setUserInfo(data))
-            .catch(err => console.log(err.message));
-    }, [product?.sellerEmail, render]);
+            .catch(err => console.log(err));
+    }, [user?.email, render]);
 
     return (
         <div className="card card-compact bg-base-100 shadow-xl">

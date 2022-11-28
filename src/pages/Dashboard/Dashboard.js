@@ -7,7 +7,9 @@ const Dashboard = () => {
     const [userInfo, setUserInfo] = useState({});
 
     useEffect(() => {
-        fetch(`http://localhost:5000/users/${user?.email}`)
+        fetch(`http://localhost:5000/users/${user?.email}`, {
+            headers: {authorization: localStorage.getItem('token')}
+        })
             .then(res => res.json())
             .then(data => setUserInfo(data))
             .catch(err => console.log(err));

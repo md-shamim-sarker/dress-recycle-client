@@ -10,7 +10,7 @@ const Products = () => {
     const {user, reportConfirmation} = useContext(AuthContext);
     const products = useLoaderData();
     const [product, setProduct] = useState(null);
-    const categoryImage = products[0].categoryImage;
+    const categoryImage = products[0]?.categoryImage;
 
     const reportHandler = (product) => {
         reportConfirmation()

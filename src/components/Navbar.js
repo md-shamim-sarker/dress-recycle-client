@@ -1,25 +1,20 @@
-import React, {useContext, useEffect, useState} from 'react';
-import {Link, NavLink} from 'react-router-dom';
+import React, {useContext} from 'react';
+import {Link, NavLink, useNavigate} from 'react-router-dom';
 import {RiMenu2Fill} from 'react-icons/ri';
 import {AiOutlineClose} from 'react-icons/ai';
 import {HiDotsVertical} from 'react-icons/hi';
 import {AuthContext} from '../contexts/UserContext';
 
 const Navbar = () => {
-    const {user, logOut, open, setOpen} = useContext(AuthContext);
-    const [userInfo, setUserInfo] = useState({});
+    const {user, logOut, open, setOpen, render, setRender} = useContext(AuthContext);
+    const navigate = useNavigate();
 
-    useEffect(() => {
-        fetch(`http://localhost:5000/users/${user?.email}`)
-            .then(res => res.json())
-            .then(data => setUserInfo(data))
-            .catch(err => console.log(err));
-    }, [user?.email]);
 
     const logOutHandler = () => {
         logOut()
             .then(() => {
-                console.log("Logout Successfull!");
+                setRender(!render);
+                navigate("/");
             }).catch(err => console.log(err));
     };
 
@@ -56,7 +51,7 @@ const Navbar = () => {
             <div className="navbar-end">
                 <p className='text-lg font-bold mr-2'>
                     {
-                        userInfo?.role?.toUpperCase()
+                        user?.displayName
                     }
                 </p>
                 {

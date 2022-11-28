@@ -27,6 +27,15 @@ const MyProducts = () => {
         }).catch(err => console.log(err));
     };
 
+    const unSoldOutHandler = product => {
+        fetch(`http://localhost:5000/products/unSoldOut/${product._id}`, {
+            method: 'PUT',
+        }).then(() => {
+            toast.success('Successfully Make Available!');
+            setRender(!render);
+        }).catch(err => console.log(err));
+    };
+
     const handleDelete = product => {
         deleteConfirmation()
             .then((result) => {
@@ -85,6 +94,7 @@ const MyProducts = () => {
                                 advertiseHandler={advertiseHandler}
                                 unAdvertiseHandler={unAdvertiseHandler}
                                 handleDelete={handleDelete}
+                                unSoldOutHandler={unSoldOutHandler}
                             ></MyProduct>)
                         }
                     </tbody>

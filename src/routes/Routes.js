@@ -18,6 +18,7 @@ import Sellers from "../pages/Users/Sellers/Sellers";
 import Buyers from "../pages/Users/Buyers/Buyers";
 import UpdateProducts from "../pages/UpdateProducts/UpdateProducts";
 import Dashboard from "../pages/Dashboard/Dashboard";
+import Payment from "../pages/Payment/Payment";
 
 const router = createBrowserRouter([
     {
@@ -93,6 +94,11 @@ const router = createBrowserRouter([
                 loader: ({params}) => fetch(`http://localhost:5000/products/id/${params.id}`),
                 element: <PrivateRoute><UpdateProducts></UpdateProducts></PrivateRoute>
             },
+            {
+                path: "/dashboard/payment/:id",
+                loader: ({params}) => fetch(`http://localhost:5000/orders/id/${params.id}`),
+                element: <PrivateRoute><Payment></Payment></PrivateRoute>
+            }
         ],
         errorElement: <ErrorPage></ErrorPage>
     }
