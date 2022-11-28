@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, {useContext, useEffect, useState} from 'react';
 import toast from 'react-hot-toast';
 import {AuthContext} from '../../contexts/UserContext';
@@ -36,13 +37,11 @@ const ReportedItems = () => {
     };
 
     useEffect(() => {
-        fetch('https://dress-recycle-server.vercel.app/products/report/true')
-            .then(res => res.json())
-            .then(data => setReportedItems(data))
-            .catch(err => console.log(err));
+        axios.get('https://dress-recycle-server.vercel.app/products/report/true')
+            .then(response => {
+                setReportedItems(response.data);
+            });
     }, [render]);
-
-
 
     return (
         <div>

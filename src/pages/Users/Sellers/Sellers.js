@@ -1,18 +1,18 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext} from 'react';
 import {AuthContext} from '../../../contexts/UserContext';
 import Seller from './Seller';
 import toast from 'react-hot-toast';
+import {useQuery} from '@tanstack/react-query';
 
 const Sellers = () => {
-    const [sellers, setSellers] = useState([]);
-    const {render, setRender, deleteConfirmation} = useContext(AuthContext);
+    const {deleteConfirmation} = useContext(AuthContext);
 
     const makeAdminHandler = user => {
         fetch(`https://dress-recycle-server.vercel.app/users/makeAdmin/${user._id}`, {
             method: 'PUT',
         }).then(() => {
             toast.success('Successfully Made Admin!');
-            setRender(!render);
+            refetch();
         }).catch(err => console.log(err));
     };
 
@@ -21,7 +21,7 @@ const Sellers = () => {
             method: 'PUT',
         }).then(() => {
             toast.success('Successfully Seller Verified!');
-            setRender(!render);
+            refetch();
         }).catch(err => console.log(err));
     };
 
@@ -30,7 +30,7 @@ const Sellers = () => {
             method: 'PUT',
         }).then(() => {
             toast.success('Successfully Seller Unverified!');
-            setRender(!render);
+            refetch();
         }).catch(err => console.log(err));
     };
 
@@ -44,26 +44,23 @@ const Sellers = () => {
                         .then(res => res.json())
                         .then(() => {
                             toast.success('Delete Successfully!');
-                            setRender(!render);
+                            refetch();
                         })
                         .catch(err => console.log(err));
                 } else {
                     toast.success('Delete Cancelled!');
                 }
-
             });
     };
 
-    useEffect(() => {
-        fetch('https://dress-recycle-server.vercel.app/users/role2/seller', {
-            headers: {
-                authorization: localStorage.getItem('token')
-            }
-        })
-            .then(res => res.json())
-            .then(data => setSellers(data))
-            .catch(err => console.log(err));
-    }, [render]);
+    const {data: sellers = [], refetch} = useQuery({
+        queryKey: ['users/role2/seller'],
+        queryFn: async () => {
+            const res = await fetch('https://dress-recycle-server.vercel.app/users/role2/seller');
+            const data = await res.json();
+            return data;
+        }
+    });
 
     return (
         <div>

@@ -19,6 +19,7 @@ import Buyers from "../pages/Users/Buyers/Buyers";
 import UpdateProducts from "../pages/UpdateProducts/UpdateProducts";
 import Dashboard from "../pages/Dashboard/Dashboard";
 import Payment from "../pages/Payment/Payment";
+import Loading from "../components/Loading";
 
 const router = createBrowserRouter([
     {
@@ -98,6 +99,10 @@ const router = createBrowserRouter([
                 path: "/dashboard/payment/:id",
                 loader: ({params}) => fetch(`https://dress-recycle-server.vercel.app/orders/id/${params.id}`),
                 element: <PrivateRoute><Payment></Payment></PrivateRoute>
+            },
+            {
+                path: "/dashboard/loading",
+                element: <Loading></Loading>
             }
         ],
         errorElement: <ErrorPage></ErrorPage>

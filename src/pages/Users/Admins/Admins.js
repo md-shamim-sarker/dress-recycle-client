@@ -1,18 +1,18 @@
-import React, {useContext, useEffect, useState} from 'react';
+import {useQuery} from '@tanstack/react-query';
+import React, {useContext} from 'react';
 import toast from 'react-hot-toast';
 import {AuthContext} from '../../../contexts/UserContext';
 import Admin from './Admin';
 
 const Admins = () => {
-    const [admins, setAdmins] = useState([]);
-    const {render, setRender, deleteConfirmation} = useContext(AuthContext);
+    const {deleteConfirmation} = useContext(AuthContext);
 
     const cancelAdminHandler = user => {
         fetch(`https://dress-recycle-server.vercel.app/users/cancelAdmin/${user._id}`, {
             method: 'PUT',
         }).then(() => {
             toast.success('Successfully Canceled Admin!');
-            setRender(!render);
+            refetch();
         }).catch(err => console.log(err));
     };
 
@@ -26,7 +26,7 @@ const Admins = () => {
                         .then(res => res.json())
                         .then(() => {
                             toast.success('Delete Successfully!');
-                            setRender(!render);
+                            refetch();
                         })
                         .catch(err => console.log(err));
                 } else {
@@ -36,16 +36,14 @@ const Admins = () => {
             });
     };
 
-    useEffect(() => {
-        fetch('https://dress-recycle-server.vercel.app/users/role2/admin', {
-            headers: {
-                authorization: localStorage.getItem('token')
-            }
-        })
-            .then(res => res.json())
-            .then(data => setAdmins(data))
-            .catch(err => console.log(err));
-    }, [render]);
+    const {data: admins = [], refetch} = useQuery({
+        queryKey: ['users/role2/admin'],
+        queryFn: async () => {
+            const res = await fetch('https://dress-recycle-server.vercel.app/users/role2/admin');
+            const data = await res.json();
+            return data;
+        }
+    });
 
     return (
         <div>

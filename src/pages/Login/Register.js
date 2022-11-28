@@ -19,15 +19,15 @@ const Register = () => {
     const from = location.state?.from?.pathname || "/";
 
     // Token handler
-    /*  const tokenHandler = (email) => {
-         return fetch('https://dress-recycle-server.vercel.app/jwt', {
-             method: 'POST',
-             headers: {
-                 'content-type': 'application/json'
-             },
-             body: JSON.stringify(email)
-         });
-     }; */
+    const tokenHandler = (email) => {
+        return fetch('https://dress-recycle-server.vercel.app/jwt', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(email)
+        });
+    };
 
     const onSubmit = data => {
         const user = {
@@ -60,17 +60,17 @@ const Register = () => {
                                 const currentUser = {
                                     email: user.email
                                 };
-                                console.log(currentUser);
+                                // console.log(currentUser);
                                 // Set jwt token
-                                /* tokenHandler(currentUser)
+                                tokenHandler(currentUser)
                                     .then(res => res.json())
                                     .then(data => {
                                         localStorage.setItem('token', data.token);
                                         navigate(from, {replace: true});
-                                    }); */
+                                    });
                             })
                             .catch(err => console.log(err));
-                        navigate(from, {replace: true});
+                        // navigate(from, {replace: true});
                     }).catch(err => console.log(err));
             }).catch(err => console.log(err));
         reset();

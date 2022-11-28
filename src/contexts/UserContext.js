@@ -139,6 +139,7 @@ const UserContext = ({children}) => {
         signInWithFacebook,
         logOut,
         loading,
+        setLoading,
         createUser,
         updateUser,
         signInWithEmailPassword,

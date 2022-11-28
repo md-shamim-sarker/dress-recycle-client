@@ -20,15 +20,15 @@ const Login = () => {
     const from = location.state?.from?.pathname || "/";
 
     // Token handler
-    /*  const tokenHandler = (email) => {
-         return fetch('https://dress-recycle-server.vercel.app/jwt', {
-             method: 'POST',
-             headers: {
-                 'content-type': 'application/json'
-             },
-             body: JSON.stringify(email)
-         });
-     }; */
+    const tokenHandler = (currentUser) => {
+        return fetch('https://dress-recycle-server.vercel.app/jwt', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(currentUser)
+        });
+    };
 
     const signInWithGoogleHandler = () => {
         signInWithGoogle()
@@ -47,15 +47,15 @@ const Login = () => {
                 const currentUser = {
                     email: user.email
                 };
-                console.log(currentUser);
+                // console.log(currentUser);
                 // Set jwt token
-                /* tokenHandler(currentUser)
+                tokenHandler(currentUser)
                     .then(res => res.json())
                     .then(data => {
                         localStorage.setItem('token', data.token);
                         navigate(from, {replace: true});
-                    }); */
-                navigate(from, {replace: true});
+                    });
+                // navigate(from, {replace: true});
                 // Add to database
                 isUserExist(user.email)
                     .then(res => res.json())
@@ -91,15 +91,15 @@ const Login = () => {
                 const currentUser = {
                     email: user.email
                 };
-                console.log(currentUser);
+                // console.log(currentUser);
                 // Set jwt token
-                /*  tokenHandler(currentUser)
-                     .then(res => res.json())
-                     .then(data => {
-                         localStorage.setItem('token', data.token);
-                         navigate(from, {replace: true});
-                     }); */
-                navigate(from, {replace: true});
+                tokenHandler(currentUser)
+                    .then(res => res.json())
+                    .then(data => {
+                        localStorage.setItem('token', data.token);
+                        navigate(from, {replace: true});
+                    });
+                // navigate(from, {replace: true});
                 // Add to database
                 isUserExist(user.email)
                     .then(res => res.json())
@@ -126,15 +126,15 @@ const Login = () => {
                 const currentUser = {
                     email: user.email
                 };
-                console.log(currentUser);
+                // console.log(currentUser);
                 // Set jwt token
-                /* tokenHandler(currentUser)
+                tokenHandler(currentUser)
                     .then(res => res.json())
                     .then(data => {
                         localStorage.setItem('token', data.token);
                         navigate(from, {replace: true});
-                    }); */
-                navigate(from, {replace: true});
+                    });
+                // navigate(from, {replace: true});
             }).catch(err => console.log(err));
     };
 

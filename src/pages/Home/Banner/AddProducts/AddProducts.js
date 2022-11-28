@@ -1,5 +1,6 @@
 import React, {useContext, useEffect, useState} from 'react';
 import {useForm} from 'react-hook-form';
+import toast from 'react-hot-toast';
 import {AuthContext} from '../../../../contexts/UserContext';
 
 const AddProducts = () => {
@@ -47,7 +48,7 @@ const AddProducts = () => {
             .then(data => {
                 console.log(data);
                 if(data.acknowledged) {
-                    alert("Product added successfully!");
+                    toast.success("Product added successfully!");
                 }
             })
             .catch(console.dir);

@@ -1,18 +1,18 @@
-import React, {useContext, useEffect, useState} from 'react';
+import {useQuery} from '@tanstack/react-query';
+import React, {useContext} from 'react';
 import toast from 'react-hot-toast';
 import {AuthContext} from '../../../contexts/UserContext';
 import Buyer from './Buyer';
 
 const Buyers = () => {
-    const [buyers, setBuyers] = useState([]);
-    const {render, setRender, deleteConfirmation} = useContext(AuthContext);
+    const {deleteConfirmation} = useContext(AuthContext);
 
     const makeAdminHandler = user => {
         fetch(`https://dress-recycle-server.vercel.app/users/makeAdmin/${user._id}`, {
             method: 'PUT',
         }).then(() => {
-            setRender(!render);
             toast.success('Successfully Made Admin!');
+            refetch();
         }).catch(err => console.log(err));
     };
 
@@ -26,7 +26,7 @@ const Buyers = () => {
                         .then(res => res.json())
                         .then(() => {
                             toast.success('Delete Successfully!');
-                            setRender(!render);
+                            refetch();
                         })
                         .catch(err => console.log(err));
                 } else {
@@ -36,16 +36,14 @@ const Buyers = () => {
             });
     };
 
-    useEffect(() => {
-        fetch('https://dress-recycle-server.vercel.app/users/role2/buyer', {
-            headers: {
-                authorization: localStorage.getItem('token')
-            }
-        })
-            .then(res => res.json())
-            .then(data => setBuyers(data))
-            .catch(err => console.log(err));
-    }, [render]);
+    const {data: buyers = [], refetch} = useQuery({
+        queryKey: ['users/role2/buyer'],
+        queryFn: async () => {
+            const res = await fetch('https://dress-recycle-server.vercel.app/users/role2/buyer');
+            const data = await res.json();
+            return data;
+        }
+    });
 
     return (
         <div>
