@@ -10,7 +10,7 @@ const CheckoutForm = ({product}) => {
     const [productInfo, setProductInfo] = useState(null);
 
     useEffect(() => {
-        fetch(`https://dress-recycle-server.vercel.app/products2/${product?.productId}`)
+        fetch(`http://localhost:5000/products2/${product?.productId}`)
             .then(res => res.json())
             .then(data => setProductInfo(data))
             .catch(err => console.log(err));
@@ -37,10 +37,10 @@ const CheckoutForm = ({product}) => {
                 ...product,
                 paymentDate: Date().slice(4, 24),
             };
-            dataAddToDb(paymentsDetails, 'https://dress-recycle-server.vercel.app/payments')
+            dataAddToDb(paymentsDetails, 'http://localhost:5000/payments')
                 .then((result) => {
                     if(result.ok) {
-                        fetch(`https://dress-recycle-server.vercel.app/products/soldOut/${product?.productId}`, {
+                        fetch(`http://localhost:5000/products/soldOut/${product?.productId}`, {
                             method: 'PUT',
                         }).then(() => {
                             toast.success('Payment Successfull!');
@@ -54,7 +54,7 @@ const CheckoutForm = ({product}) => {
 
     return (
         <div className='w-4/5 mx-auto'>
-            <h2 className='text-3xl font-bold text-blue-600 text-center mb-10'>Payment Gateway</h2>
+            <h2 className='text-3xl font-bold text-blue-600 text-center mt-16 mb-10'>Payment Gateway</h2>
             <form onSubmit={handleSubmit}>
                 <CardElement className='border p-6 bg-blue-100 rounded-xl'
                     options={{

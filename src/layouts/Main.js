@@ -9,7 +9,7 @@ const Main = () => {
     return (
         <div>
             <Navbar></Navbar>
-            <div onClick={() => setOpen(false)}>
+            <div onClick={() => setOpen(false)} className="mt-16">
                 <Outlet></Outlet>
             </div>
             <Footer></Footer>

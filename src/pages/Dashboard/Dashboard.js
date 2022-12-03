@@ -7,7 +7,7 @@ const Dashboard = () => {
     const [userInfo, setUserInfo] = useState({});
 
     useEffect(() => {
-        fetch(`https://dress-recycle-server.vercel.app/users/${user?.email}`, {
+        fetch(`http://localhost:5000/users/${user?.email}`, {
             headers: {authorization: localStorage.getItem('token')}
         })
             .then(res => res.json())
@@ -17,7 +17,7 @@ const Dashboard = () => {
 
     return (
         <div>
-            <h2 className='text-5xl font-bold text-center p-5 text-blue-600 mb-6'>Dashboard</h2>
+            <h2 className='text-5xl font-bold text-center p-5 text-blue-600 my-8'>Dashboard</h2>
             <div className='w-2/5 mx-auto flex flex-col items-center justify-center gap-y-3'>
                 {
                     userInfo?.isAdmin && <>

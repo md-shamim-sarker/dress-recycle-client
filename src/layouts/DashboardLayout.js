@@ -1,6 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react';
 import {NavLink, Outlet} from 'react-router-dom';
-import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
 import {AuthContext} from '../contexts/UserContext';
 
@@ -9,7 +8,7 @@ const DashboardLayout = () => {
     const [userInfo, setUserInfo] = useState({});
 
     useEffect(() => {
-        fetch(`https://dress-recycle-server.vercel.app/users/${user?.email}`, {
+        fetch(`http://localhost:5000/users/${user?.email}`, {
             headers: {authorization: localStorage.getItem('token')}
         })
             .then(res => res.json())
@@ -27,7 +26,7 @@ const DashboardLayout = () => {
                 </div>
                 <div className="drawer-side border-r">
                     <label htmlFor="dashboard-drawer" className="drawer-overlay"></label>
-                    <ul className="menu p-4 w-60 bg-base-100 text-base-content gap-y-2">
+                    <ul className="menu mt-14 p-4 w-60 bg-base-100 text-base-content gap-y-2">
                         {
                             userInfo?.isAdmin && <>
                                 <li><NavLink to={"/dashboard/role/admins"}>All Admins</NavLink></li>
@@ -51,7 +50,6 @@ const DashboardLayout = () => {
                     </ul>
                 </div>
             </div>
-            <Footer></Footer>
         </div>
     );
 };

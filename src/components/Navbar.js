@@ -27,7 +27,7 @@ const Navbar = () => {
     </>;
 
     return (
-        <div className="navbar border-b bg-base-200">
+        <div className="w-full navbar border-b bg-base-200 fixed z-50 top-0">
             <div className="navbar-start">
                 <div className="dropdown">
                     <label onClick={() => setOpen(!open)} tabIndex={0} className="lg:hidden cursor-pointer">

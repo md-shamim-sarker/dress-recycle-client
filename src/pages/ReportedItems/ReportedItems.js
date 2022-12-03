@@ -9,7 +9,7 @@ const ReportedItems = () => {
     const {render, setRender, deleteConfirmation} = useContext(AuthContext);
 
     const unReportHandler = (product) => {
-        fetch(`https://dress-recycle-server.vercel.app/products/unreport/${product._id}`, {
+        fetch(`http://localhost:5000/products/unreport/${product._id}`, {
             method: 'PUT',
         }).then(() => {
             toast.success('Successfully Report Cancelled!');
@@ -21,7 +21,7 @@ const ReportedItems = () => {
         deleteConfirmation()
             .then((result) => {
                 if(result.isConfirmed) {
-                    fetch(`https://dress-recycle-server.vercel.app/products/report/${user._id}`, {
+                    fetch(`http://localhost:5000/products/report/${user._id}`, {
                         method: 'DELETE'
                     })
                         .then(res => res.json())
@@ -37,7 +37,7 @@ const ReportedItems = () => {
     };
 
     useEffect(() => {
-        axios.get('https://dress-recycle-server.vercel.app/products/report/true')
+        axios.get('http://localhost:5000/products/report/true')
             .then(response => {
                 setReportedItems(response.data);
             });

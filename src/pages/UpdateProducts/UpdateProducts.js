@@ -21,7 +21,7 @@ const UpdateProducts = () => {
             yearsOfUse: data.yearsOfUse,
             date: Date().slice(4, 24)
         };
-        fetch(`https://dress-recycle-server.vercel.app/products/update/${product._id}`, {
+        fetch(`http://localhost:5000/products/update/${product._id}`, {
             method: 'PUT',
             headers: {'content-type': 'application/json'},
             body: JSON.stringify(products)

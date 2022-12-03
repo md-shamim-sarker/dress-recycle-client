@@ -10,7 +10,7 @@ const AddProducts = () => {
     const {displayName, email} = user;
 
     useEffect(() => {
-        fetch('https://dress-recycle-server.vercel.app/categories')
+        fetch('http://localhost:5000/categories')
             .then(res => res.json())
             .then(data => setCategories(data))
             .catch(err => console.log(err));
@@ -24,7 +24,7 @@ const AddProducts = () => {
             condition: data.condition,
             description: data.description,
             sellerName: data.fullName,
-            sellerEmail: data.email,
+            sellerEmail: data?.email,
             sellerPhone: data.phone,
             image: data.image,
             location: data.location,
@@ -38,7 +38,7 @@ const AddProducts = () => {
             date: Date().slice(4, 24)
         };
 
-        fetch('https://dress-recycle-server.vercel.app/products', {
+        fetch('http://localhost:5000/products', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

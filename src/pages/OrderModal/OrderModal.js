@@ -8,7 +8,7 @@ const OrderModal = ({product, setProduct}) => {
         event.preventDefault();
         const form = event.target;
         const userName = form.userName.value;
-        const userEmail = form.email.value;
+        const userEmail = form?.email.value;
         const userPhone = form.phone.value;
         const sellerName = product.sellerName;
         const sellerEmail = product.sellerEmail;
@@ -23,7 +23,7 @@ const OrderModal = ({product, setProduct}) => {
         const orders = {userName, userEmail, userPhone, sellerName, sellerEmail, sellerPhone, productId, productName, productImage, productPrice, meetingLocation, orderDate};
         console.log(orders);
 
-        dataAddToDb(orders, 'https://dress-recycle-server.vercel.app/orders')
+        dataAddToDb(orders, 'http://localhost:5000/orders')
             .then(() => {
                 toast.success('Successfully Ordered!');
                 setProduct(null);

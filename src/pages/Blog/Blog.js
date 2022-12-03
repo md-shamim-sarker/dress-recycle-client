@@ -17,7 +17,7 @@ const Blog = () => {
 
     return (
         <>
-            <h2 className='text-3xl font-bold text-center my-10'>Blog Page</h2>
+            <h2 className='text-3xl font-bold text-center mt-20 mb-10'>Blog Page</h2>
             <div className='w-11/12 lg:w-4/5 mx-auto flex flex-col gap-y-3 mb-10'>
                 {
                     loading && <Loading></Loading>

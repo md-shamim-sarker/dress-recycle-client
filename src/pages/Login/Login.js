@@ -21,7 +21,7 @@ const Login = () => {
 
     // Token handler
     const tokenHandler = (currentUser) => {
-        return fetch('https://dress-recycle-server.vercel.app/jwt', {
+        return fetch('http://localhost:5000/jwt', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -36,7 +36,7 @@ const Login = () => {
                 const data = result.user;
                 const user = {
                     fullName: data.displayName,
-                    email: data.email,
+                    email: data?.email,
                     phone: "",
                     role: 'buyer',
                     isVerified: false,
@@ -45,7 +45,7 @@ const Login = () => {
                 };
 
                 const currentUser = {
-                    email: user.email
+                    email: user?.email
                 };
                 // console.log(currentUser);
                 // Set jwt token
@@ -57,11 +57,11 @@ const Login = () => {
                     });
                 // navigate(from, {replace: true});
                 // Add to database
-                isUserExist(user.email)
+                isUserExist(user?.email)
                     .then(res => res.json())
                     .then(data => {
                         if(data.length === 0) {
-                            dataAddToDb(user, 'https://dress-recycle-server.vercel.app/users')
+                            dataAddToDb(user, 'http://localhost:5000/users')
                                 .then((result) => {
                                     if(result.ok) {
                                         toast.success('This user is saved to database!');
@@ -80,7 +80,7 @@ const Login = () => {
                 const data = result.user;
                 const user = {
                     fullName: data.displayName,
-                    email: data.email,
+                    email: data?.email,
                     phone: "",
                     role: 'buyer',
                     isVerified: false,
@@ -89,7 +89,7 @@ const Login = () => {
                 };
 
                 const currentUser = {
-                    email: user.email
+                    email: user?.email
                 };
                 // console.log(currentUser);
                 // Set jwt token
@@ -101,11 +101,11 @@ const Login = () => {
                     });
                 // navigate(from, {replace: true});
                 // Add to database
-                isUserExist(user.email)
+                isUserExist(user?.email)
                     .then(res => res.json())
                     .then(data => {
                         if(data.length === 0) {
-                            dataAddToDb(user, 'https://dress-recycle-server.vercel.app/users')
+                            dataAddToDb(user, 'http://localhost:5000/users')
                                 .then((result) => {
                                     if(result.ok) {
                                         toast.success('This user is saved to database!');
@@ -119,12 +119,12 @@ const Login = () => {
     };
 
     const onSubmit = data => {
-        signInWithEmailPassword(data.email, data.password)
+        signInWithEmailPassword(data?.email, data.password)
             .then(result => {
                 const user = result.user;
 
                 const currentUser = {
-                    email: user.email
+                    email: user?.email
                 };
                 // console.log(currentUser);
                 // Set jwt token

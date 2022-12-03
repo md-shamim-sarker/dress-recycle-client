@@ -44,7 +44,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "/categories/:id",
-                loader: ({params}) => fetch(`https://dress-recycle-server.vercel.app/categories/${params.id}`),
+                loader: ({params}) => fetch(`http://localhost:5000/categories/${params.id}`),
                 element: <Products></Products>
             }
         ],
@@ -92,12 +92,12 @@ const router = createBrowserRouter([
             },
             {
                 path: "/dashboard/update/:id",
-                loader: ({params}) => fetch(`https://dress-recycle-server.vercel.app/products/id/${params.id}`),
+                loader: ({params}) => fetch(`http://localhost:5000/products/id/${params.id}`),
                 element: <PrivateRoute><UpdateProducts></UpdateProducts></PrivateRoute>
             },
             {
                 path: "/dashboard/payment/:id",
-                loader: ({params}) => fetch(`https://dress-recycle-server.vercel.app/orders/id/${params.id}`),
+                loader: ({params}) => fetch(`http://localhost:5000/orders/id/${params.id}`),
                 element: <PrivateRoute><Payment></Payment></PrivateRoute>
             },
             {

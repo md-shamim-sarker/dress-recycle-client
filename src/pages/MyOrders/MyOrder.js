@@ -5,7 +5,7 @@ const MyOrder = ({sl, product, handleDelete}) => {
 
     const [productInfo, setProductInfo] = useState(null);
     useEffect(() => {
-        fetch(`https://dress-recycle-server.vercel.app/products2/${product?.productId}`)
+        fetch(`http://localhost:5000/products2/${product?.productId}`)
             .then(res => res.json())
             .then(data => setProductInfo(data))
             .catch(err => console.log(err));

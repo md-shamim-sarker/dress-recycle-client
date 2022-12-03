@@ -20,7 +20,7 @@ const Register = () => {
 
     // Token handler
     const tokenHandler = (email) => {
-        return fetch('https://dress-recycle-server.vercel.app/jwt', {
+        return fetch('http://localhost:5000/jwt', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -32,7 +32,7 @@ const Register = () => {
     const onSubmit = data => {
         const user = {
             fullName: data.fullName,
-            email: data.email,
+            email: data?.email,
             phone: data.phone,
             role: data.role,
             isAdmin: false,
@@ -41,24 +41,24 @@ const Register = () => {
             image: data.image
         };
 
-        createUser(data.email, data.password)
+        createUser(data?.email, data.password)
             .then((result) => {
                 console.log(result);
                 logOut().then().catch();
                 updateUser(data.fullName, data.image)
                     .then(() => {
-                        dataAddToDb(user, 'https://dress-recycle-server.vercel.app/users')
+                        dataAddToDb(user, 'http://localhost:5000/users')
                             .then((result) => {
                                 if(result.ok) {
                                     toast.success('This user is saved to database!');
                                 }
                             }).catch(console.dir);
-                        signInWithEmailPassword(data.email, data.password)
+                        signInWithEmailPassword(data?.email, data.password)
                             .then((result) => {
                                 const user = result.user;
 
                                 const currentUser = {
-                                    email: user.email
+                                    email: user?.email
                                 };
                                 // console.log(currentUser);
                                 // Set jwt token

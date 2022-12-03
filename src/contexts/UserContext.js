@@ -95,7 +95,7 @@ const UserContext = ({children}) => {
 
     // User Check in db
     const isUserExist = (email) => {
-        return fetch(`https://dress-recycle-server.vercel.app/users2/${email}`);
+        return fetch(`http://localhost:5000/users2/${email}`);
     };
 
     // Delete Confirmation
