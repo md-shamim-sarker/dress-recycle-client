@@ -9,7 +9,7 @@ const MyProducts = () => {
 
     const advertiseHandler = product => {
         // console.log(product._id);
-        fetch(`http://localhost:5000/products/advertise2/${product._id}`, {
+        fetch(`https://dress-recycle-server.vercel.app/products/advertise2/${product._id}`, {
             method: 'PUT',
         }).then(() => {
             toast.success('Successfully Add to Advertise!');
@@ -19,7 +19,7 @@ const MyProducts = () => {
 
     const unAdvertiseHandler = product => {
         // console.log(product._id);
-        fetch(`http://localhost:5000/products/unAdvertise2/${product._id}`, {
+        fetch(`https://dress-recycle-server.vercel.app/products/unAdvertise2/${product._id}`, {
             method: 'PUT',
         }).then(() => {
             toast.success('Successfully Remove from Advertise!');
@@ -28,7 +28,7 @@ const MyProducts = () => {
     };
 
     const unSoldOutHandler = product => {
-        fetch(`http://localhost:5000/products/unSoldOut/${product._id}`, {
+        fetch(`https://dress-recycle-server.vercel.app/products/unSoldOut/${product._id}`, {
             method: 'PUT',
         }).then(() => {
             toast.success('Successfully Make Available!');
@@ -40,7 +40,7 @@ const MyProducts = () => {
         deleteConfirmation()
             .then((result) => {
                 if(result.isConfirmed) {
-                    fetch(`http://localhost:5000/products/${product._id}`, {
+                    fetch(`https://dress-recycle-server.vercel.app/products/${product._id}`, {
                         method: 'DELETE'
                     })
                         .then(res => res.json())
@@ -57,7 +57,7 @@ const MyProducts = () => {
     };
 
     useEffect(() => {
-        fetch(`http://localhost:5000/products/${user?.email}`, {
+        fetch(`https://dress-recycle-server.vercel.app/products/${user?.email}`, {
             headers: {
                 authorization: localStorage.getItem('token')
             }

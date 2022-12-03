@@ -10,7 +10,7 @@ const CheckoutForm = ({product}) => {
     const [productInfo, setProductInfo] = useState(null);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/products2/${product?.productId}`)
+        fetch(`https://dress-recycle-server.vercel.app/products2/${product?.productId}`)
             .then(res => res.json())
             .then(data => setProductInfo(data))
             .catch(err => console.log(err));
@@ -37,10 +37,10 @@ const CheckoutForm = ({product}) => {
                 ...product,
                 paymentDate: Date().slice(4, 24),
             };
-            dataAddToDb(paymentsDetails, 'http://localhost:5000/payments')
+            dataAddToDb(paymentsDetails, 'https://dress-recycle-server.vercel.app/payments')
                 .then((result) => {
                     if(result.ok) {
-                        fetch(`http://localhost:5000/products/soldOut/${product?.productId}`, {
+                        fetch(`https://dress-recycle-server.vercel.app/products/soldOut/${product?.productId}`, {
                             method: 'PUT',
                         }).then(() => {
                             toast.success('Payment Successfull!');

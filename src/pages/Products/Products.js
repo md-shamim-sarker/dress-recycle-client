@@ -16,7 +16,7 @@ const Products = () => {
         reportConfirmation()
             .then((result) => {
                 if(result.isConfirmed) {
-                    fetch(`http://localhost:5000/products/report/${product._id}`, {
+                    fetch(`https://dress-recycle-server.vercel.app/products/report/${product._id}`, {
                         method: 'PUT',
                     }).then(() => {
                         toast.success('Successfully Reported!');
@@ -40,7 +40,7 @@ const Products = () => {
             productPrice: product.resalePrice,
             wishDate: Date().slice(4, 24)
         };
-        fetch('http://localhost:5000/wishLists', {
+        fetch('https://dress-recycle-server.vercel.app/wishLists', {
             method: 'POST',
             headers: {'content-type': 'application/json'},
             body: JSON.stringify(wishList)

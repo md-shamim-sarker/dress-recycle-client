@@ -10,7 +10,7 @@ const MyWishLists = () => {
     const [product, setProduct] = useState(null);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/wishLists/${user?.email}`, {
+        fetch(`https://dress-recycle-server.vercel.app/wishLists/${user?.email}`, {
             headers: {
                 authorization: localStorage.getItem('token')
             }
@@ -23,7 +23,7 @@ const MyWishLists = () => {
     }, [user?.email, render]);
 
     const handleDelete = product => {
-        fetch(`http://localhost:5000/wishLists/${product._id}`, {
+        fetch(`https://dress-recycle-server.vercel.app/wishLists/${product._id}`, {
             method: 'DELETE'
         })
             .then(res => res.json())

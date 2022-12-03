@@ -23,7 +23,7 @@ const OrderModal = ({product, setProduct}) => {
         const orders = {userName, userEmail, userPhone, sellerName, sellerEmail, sellerPhone, productId, productName, productImage, productPrice, meetingLocation, orderDate};
         console.log(orders);
 
-        dataAddToDb(orders, 'http://localhost:5000/orders')
+        dataAddToDb(orders, 'https://dress-recycle-server.vercel.app/orders')
             .then(() => {
                 toast.success('Successfully Ordered!');
                 setProduct(null);
