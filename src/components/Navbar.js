@@ -4,6 +4,7 @@ import {RiMenu2Fill} from 'react-icons/ri';
 import {AiOutlineClose} from 'react-icons/ai';
 import {HiDotsVertical} from 'react-icons/hi';
 import {AuthContext} from '../contexts/UserContext';
+import logo from '../assets/logo.jpg';
 
 const Navbar = () => {
     const {user, logOut, open, setOpen, render, setRender} = useContext(AuthContext);
@@ -41,7 +42,10 @@ const Navbar = () => {
                         {menuItems}
                     </ul>
                 </div>
-                <Link to={"/"} className="uppercase text-primary text-xl lg:text-2xl font-bold ml-2">Dress Recycle</Link>
+                <Link to={"/"} className="uppercase text-primary text-md lg:text-2xl font-bold ml-2 flex items-center gap-x-1">
+                    <img src={logo} alt="logo" className='w-12' />
+                    <span>Dress Recycle</span>
+                </Link>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal p-0">
@@ -49,7 +53,7 @@ const Navbar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                <p className='text-lg font-bold mr-2'>
+                <p className='text-lg font-bold mr-2 hidden lg:block'>
                     {
                         user?.displayName
                     }
